@@ -38,6 +38,8 @@ find out the ip of the machine in the network
     -oN /root/kioptrix1_detailed.txt
     <host>
 
+**Enumeration**
+All kind of enumeration topics
 
 **Search for Directories**
 
@@ -89,3 +91,27 @@ search for an auxiliary scanner for smb with meatsploit
 SAMBA is a good source for exploits
 
 **DNS Enumeration**
+
+*zonetransfer*
+
+DNS Server
+    host -t ns zonetransfer.me
+Mail Server
+    host -t mx zonetransfer.me
+Host Information
+    host zonetransfer.me
+
+Zonetransfer information
+    host -l zonetransfer.me <name server>
+
+gives you unique dns/ip addresses
+
+*dnsrecon*
+
+    dnsrecon -d zonetransfer.me -t axfr
+    axfr - for Zonetransfer
+
+*dnsenum*
+    dnsenum zonetransfer.me
+its more clean and faster as the other ones
+
