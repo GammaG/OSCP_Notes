@@ -9,11 +9,13 @@ find out the ip of the machine in the network
 **Find ports**
 
 *SSH fast UDP*
+
     nmap -Pn --top-ports 1000 -sU --stats-every 3m --max-retries 1 -T3 -oN /root/kioptrix.txt 192.168.156.102
 
     -sU                         UDP Scan
 
 *SSH intensive* 
+
     nmap -Pn -sS --stats-every 3m --max-retries 1 --max-scan-delay 20 --defeat-rst-ratelimit -T4 -p1-65535 -oN /root/desktop/kioptrix.txt 192.168.156.102
 
     -Pn                         Do not ping the host
@@ -28,6 +30,7 @@ find out the ip of the machine in the network
     <target>                    ip e.g.
 
 *Specific Ports Scan*
+
     sudo nmap -Pn -nvv -p 22,80,8080 --version intensity 9 -A -oN /home/kali/Desktop/kioptrix.txt
 
     -nvv 
@@ -39,11 +42,13 @@ find out the ip of the machine in the network
     <host>
 
 **Enumeration**
+
 All kind of enumeration topics
 
 **Search for Directories**
 
 *dirbuster - with UI*
+
 Good to download a wordlist from github
 take a big one and remove "manual"
 
@@ -95,13 +100,19 @@ SAMBA is a good source for exploits
 *zonetransfer*
 
 DNS Server
+
     host -t ns zonetransfer.me
+
 Mail Server
+
     host -t mx zonetransfer.me
+
 Host Information
+
     host zonetransfer.me
 
 Zonetransfer information
+
     host -l zonetransfer.me <name server>
 
 gives you unique dns/ip addresses
@@ -112,7 +123,9 @@ gives you unique dns/ip addresses
     axfr - for Zonetransfer
 
 *dnsenum*
+
     dnsenum zonetransfer.me
+
 its more clean and faster as the other ones
 
 **other types**
