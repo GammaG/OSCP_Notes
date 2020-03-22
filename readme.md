@@ -6,7 +6,7 @@ find out the ip of the machine in the network
 
     netdiscover -i  eth1
 
-*Find ports* 
+**Find ports**
 
 *SSH fast UDP*
     nmap -Pn --top-ports 1000 -sU --stats-every 3m --max-retries 1 -T3 -oN /root/kioptrix.txt 192.168.156.102
@@ -39,9 +39,9 @@ find out the ip of the machine in the network
     <host>
 
 
-*Search for Directories*
+**Search for Directories**
 
-dirbuster - with UI
+*dirbuster - with UI*
 Good to download a wordlist from github
 take a big one and remove "manual"
 
@@ -64,7 +64,7 @@ Has config bug
     client use spnego = no
     client ntlmv2 auth = no
 
-enum4linux <ip>
+*enum4linux <ip>*
 
 find out SAMBA Version
 
@@ -88,4 +88,4 @@ search for an auxiliary scanner for smb with meatsploit
 
 SAMBA is a good source for exploits
 
-*DNS Enumeration*
+**DNS Enumeration**
