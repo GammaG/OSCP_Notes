@@ -115,3 +115,9 @@ gives you unique dns/ip addresses
     dnsenum zonetransfer.me
 its more clean and faster as the other ones
 
+**other types**
+
+    -FTP
+    -SNMP
+    -SMTP
+
