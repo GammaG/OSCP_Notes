@@ -104,6 +104,7 @@ SAMBA is a good source for exploits
     
 If a static payload is set (to be seen by / in the path it can maybe not work).
 Solution is to replace that with a generic payload.
+https://blog.rapid7.com/2015/03/25/stageless-meterpreter-payloads/ 
 
 Generic (non staged):
 
@@ -770,6 +771,97 @@ Go back to meterpreter
     shell 
     python -c 'import pty; pty.spawn("/bin/bash")'
     su root
+
+**Post Exploitation**
+
+*Linux Post Exploitation*
+
+https://github.com/mubix/post-exploitation/wiki/Linux-Post-Exploitation-Command-List 
+
+    /bin/netstat -ano - to get open connections, maybe to get access to different networks
+
+Search for flags as well
+
+*Windows Post Exploitation*
+
+    pwdump7
+
+https://www.tarasco.org/security/pwdump_7/ 
+
+    locate in Kali and transfer these files
+    fgdump
+    wce
+
+**Windows PW Cracking**
+
+*Crack Password Hash*
+
+    john --wordlist=/root/rockyou.txt <dumpfile>
+    john --show windows
+
+*Online Hashcracker*
+
+Needs NTLM cracking for windows passwords.
+
+https://hashkiller.io/listmanager 
+https://hashes.com/decrypt/basic 
+
+**Linux PW Cracking**
+
+Unshadow
+
+    unshadow passwd shadow > unshadow.txt
+
+Cracking with John
+
+    john --rules --wordlist=/root/rockyou.txt unshadow
+    (will take forever)
+
+Alternative:
+
+    hashcat -m 500 /root/rockyou.txt unshadow
+
+Good to export that to a different machine with a strong GPU (Tower)
+
+https://hashcat.net/hashcat/ 
+
+
+**Pivoting**
+
+Tunneling into a different network via another machine.
+
+*Setup a lab*
+
+Go in virtual network editor
+
+    Kali
+        One Host-Only network with:
+        Subnet IP   10.1.10.0
+        Mask        255.255.255.255
+
+    Windows in the middle    
+
+    Victim
+        One Nat Network with:
+        Subnet IP   192.168.134.0
+        Mask        255.255.255.0
+
+*Metasploit*
+
+    run autoroute -s 192.168.134.0/24
+    run autoroute -p 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
