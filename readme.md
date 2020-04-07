@@ -869,6 +869,22 @@ Go in virtual network editor
     run autoroute -s 192.168.134.0/24
     run autoroute -p 
 
+**CTF Notes**
+
+*Reverse Shell one liner*
+
+http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet 
+
+Make files downloadable
+
+    sudo service apache2 start
+    cp file /var/www/html
+    id - gives you current rights 
+
+*Priviledge Check*
+
+https://github.com/sleventyeleven/linuxprivchecker/blob/master/linuxprivchecker.py
+
 
 
 
