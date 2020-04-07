@@ -6,6 +6,8 @@ find out the ip of the machine in the network
 
     netdiscover -i  eth1
 
+    netdiscover -r 192.168.134.0/24
+
 **Find ports**
 
 *SSH fast UDP*
@@ -13,6 +15,11 @@ find out the ip of the machine in the network
     nmap -Pn --top-ports 1000 -sU --stats-every 3m --max-retries 1 -T3 -oN /root/result.txt <ip>
 
     -sU                         UDP Scan
+
+*Shell Script*
+
+    #!/bin/bash
+    sudo nmap -Pn --top-ports 1000 -sU --stats-every 3m --max-retries 1 -T3 -oN $2.txt $1
 
 *SSH intensive* 
 
@@ -28,10 +35,15 @@ find out the ip of the machine in the network
     -p1-65535                   scan all ports
     -oN <where to save it>      save the result to a specific file
     <ip>                        ip e.g.
+    
+*Shell Script*
+
+    #!/bin/bash
+    sudo nmap -Pn -sS --stats-every 3m --max-retries 1 --max-scan-delay 20 --defeat-rst-ratelimit -T4 -p1-65535 -oN $2 $1
 
 *Specific Ports Scan*
 
-    sudo nmap -Pn -nvv -p 22,80,8080 --version-intensity 9 -A -oN /home/kali/Desktop/result.txt <ip>
+    nmap -Pn -nvv -p 22,80,8080 --version-intensity 9 -A -oN /home/kali/Desktop/result.txt <ip>
 
     -nvv 
     -Pn
@@ -40,6 +52,12 @@ find out the ip of the machine in the network
     -A
     -oN /root/result.txt
     <ip>
+
+
+*Shell Script*
+
+    #!/bin/bash
+    sudo nmap -Pn -nvv -p $2 --version-intensity 9 -A -oN $3 $1
 
 **Enumeration**
 
