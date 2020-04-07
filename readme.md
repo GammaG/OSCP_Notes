@@ -19,6 +19,10 @@ find out the ip of the machine in the network
 *Shell Script*
 
     #!/bin/bash
+    if [ "$1" == "" ] || [ "$2" == "" ]; then
+            echo "Arguments missing usage: <target_ip> <path to log>"
+            exit 0
+    fi
     sudo nmap -Pn --top-ports 1000 -sU --stats-every 3m --max-retries 1 -T3 -oN $2.txt $1
 
 *SSH intensive* 
@@ -39,6 +43,10 @@ find out the ip of the machine in the network
 *Shell Script*
 
     #!/bin/bash
+    if [ "$1" == "" ] || [ "$2" == "" ]; then
+            echo "Arguments missing usage: <target_ip> <path to log>"
+            exit 0
+    fi
     sudo nmap -Pn -sS --stats-every 3m --max-retries 1 --max-scan-delay 20 --defeat-rst-ratelimit -T4 -p1-65535 -oN $2 $1
 
 *Specific Ports Scan*
@@ -57,6 +65,10 @@ find out the ip of the machine in the network
 *Shell Script*
 
     #!/bin/bash
+    if [ "$1" == "" ] || [ "$2" == "" ] || [ "$3" == "" ]; then
+            echo "Arguments missing usage: <target_ip> <ports to scan e.g: 80,443> <path to log>"
+            exit 0
+    fi
     sudo nmap -Pn -nvv -p $2 --version-intensity 9 -A -oN $3 $1
 
 **Enumeration**
