@@ -954,7 +954,18 @@ https://github.com/pentestmonkey/php-reverse-shell
 *add local user to sudoers*
 
     echo 'chmod 777 /etc/sudoers && echo "<user> ALL=NOPASSWD: ALL" >> /etc/sudoers && chmod 440 /etc/sudoers' > /tmp/update
+    chmod 777 on the file
 
+*push cron jobs*
+
+    run-parts /etc/cron.daily
+
+*Additional*
+
+Good for notes is Cherrytree.
+https://www.giuspen.com/cherrytree/#downl 
+
+https://www.reddit.com/r/oscp/ 
 
 
 
