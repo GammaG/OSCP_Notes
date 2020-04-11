@@ -973,7 +973,10 @@ https://www.giuspen.com/cherrytree/#downl
 https://www.reddit.com/r/oscp/ 
 
 
+**Mount shared Folder**
 
+    #!/bash/bin
+    sudo mount -t vboxsf share/~share
 
 
 
