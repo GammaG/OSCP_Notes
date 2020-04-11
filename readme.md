@@ -12,6 +12,11 @@ find out the ip of the machine in the network
 
     arp-scan --local
 
+*Ping Sweep*
+
+    namp -v -sn 10.11.1.1-254 -oG ping sweep.txt
+    grep Up ping-sweep.txt | cut -d “ ” -f 2
+
 **Find ports**
 
 *SSH fast UDP*
