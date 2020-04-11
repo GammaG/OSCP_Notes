@@ -975,7 +975,7 @@ https://www.reddit.com/r/oscp/
 
 **Mount shared Folder**
 
-    #!/bash/bin
+    #!/bin/bash
     sudo mount -t vboxsf share/~share
 
 
