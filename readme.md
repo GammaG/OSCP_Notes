@@ -438,12 +438,16 @@ Go back to immunity debugger
     -s upcode equivialent 
     -m module to use
 
-That gives you a list of possible return addresses 
+That gives you a list of possible return addresses (the address cannot contain any of the already found bad characters e.g start with 0x0062XXX)
 
     0x625011af
 
 Back to Kali to write the actual expoit
-the address has to be written backwards (little indian)
+the address has to be written backwards (little endian byte order) 
+http://en.wikipedia.org/wiki/Endianness
+Generally speaking, the format used to store addresses in memory depends on the archtiecture of running OS.
+Lillte endian is currently the most widly-used format.
+
 Because the low memory byte is stored in the lowest adress in x64 architecture and the high order byte is the highest address
 
     #!/user/bin/python
