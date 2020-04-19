@@ -98,6 +98,8 @@ All kind of enumeration topics
 
 *dirbuster - with UI*
 
+    dirbuster
+
 Good to download a wordlist from github
 take a big one and remove "manual"
 
