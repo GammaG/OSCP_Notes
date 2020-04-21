@@ -878,6 +878,10 @@ Possible finding  C:\Program Files\... --> can be used by putting a file with na
 *check dir permissions*
 
     icacls "path"
+    
+*check for local admin*
+
+    net localgroup administrators
 
 *check user permissions*
 
