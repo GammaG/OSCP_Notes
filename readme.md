@@ -909,6 +909,24 @@ This will start a session handler and wait for incomming reverse shell requests.
 
     net user <accountname> <password>
 
+**Linux Enumeration**
+
+Show what a user is allowed to execute as sudo without giving a password
+
+    sudo -l
+
+Show ARP Communication
+
+    old: 
+        arp -a
+    new:
+        ip neigh
+
+Search for Passwords in  the whole system
+
+    grep --color=auto -rnw '/' -ie "PASSWORD=" --color=always 2> /dev/null
+    locate password | more
+
 **Post Exploitation**
 
 *Linux Post Exploitation*
@@ -928,6 +946,24 @@ https://www.tarasco.org/security/pwdump_7/
     locate in Kali and transfer these files
     fgdump
     wce
+
+*Unshadow*
+
+Try to decrypt passwd and shadow file
+
+    unshadow PASSWORD-FILE SADOW-FILE
+
+remove everything expect the users 
+
+*Hashcat*
+
+Identifiy the Algorithmus used for account creation
+https://hashcat.net/wiki/doku.php?id=example_hashes
+
+    hashcat64.exe -m Algorithm_Type_number cred.txt rockyou.txt -O
+    for example (1800)
+
+
 
 **Windows PW Cracking**
 
