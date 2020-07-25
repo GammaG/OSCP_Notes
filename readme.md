@@ -1033,6 +1033,11 @@ Needs NTLM cracking for windows passwords.
 https://hashkiller.io/listmanager 
 https://hashes.com/decrypt/basic 
 
+*Export User Passwords*
+
+    reg SAVE HKLM\SAM C:\SAM
+    reg SAVE HKLM\SYSTEM C:\SYSTEM
+
 **Linux PW Cracking**
 
 Unshadow
