@@ -1115,6 +1115,7 @@ Alternative:
 Good to export that to a different machine with a strong GPU (Tower)
 
 https://hashcat.net/hashcat/ 
+https://resources.infosecinstitute.com/hashcat-tutorial-beginners/ 
 
 
 **Pivoting**
@@ -1143,6 +1144,14 @@ Go in virtual network editor
     run autoroute -p 
 
 **CTF Notes**
+
+*Docker*
+
+https://gtfobins.github.io/gtfobins/docker/ 
+
+    docker run -v /:/mnt --rm -it bash chroot /mnt sh
+
+bash maybe has to be changed into what is running
 
 *SUID*
 
