@@ -1091,6 +1091,7 @@ Needs NTLM cracking for windows passwords.
 
 https://hashkiller.io/listmanager 
 https://hashes.com/decrypt/basic 
+https://crackstation.net/ 
 
 *Export User Passwords*
 
