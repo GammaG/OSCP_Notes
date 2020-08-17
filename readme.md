@@ -763,6 +763,10 @@ on DVWA the page is called via parameter "?page=" enter here the malicious page 
 
     nmap -p 80 10.0.2.11 --script http-put --script-args http-put.url='<target path>',http-put.file='<local path>'
 
+*Get with SCP*
+
+    scp <user>@<ip>:<filename> <target>
+
 
 *ftp hosting with python*
 
@@ -1323,6 +1327,16 @@ RDP
 xfreerdp is preinstalled
 
     xfreerdp /d:<domain> /u:<user> /v:<target_ip> +clipboard
+
+*Crack PGP/GPG private key*
+
+https://www.openwall.com/lists/john-users/2015/11/17/1
+
+    gpg2john target/tryhackme.asc > target/hash
+    john --wordlist=modules/rockyou.txt output
+
+    gpg --allow-secret-key-import --import tryhackme.asc
+    gpg --delete-secret-keys "tryhackme"
 
 **Additional**
 
