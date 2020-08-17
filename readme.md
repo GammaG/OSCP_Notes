@@ -1200,6 +1200,8 @@ https://gtfobins.github.io/
 Search for systemcrl - SUID
 paste the lines each single
 
+    env - is a good point here 
+
 *Escalate SUID Manually*
 
 install strace for analysing what is called by an application
