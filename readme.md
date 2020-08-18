@@ -1097,6 +1097,12 @@ move over something like shell.c and gcc it + chmod +s it
 If sudo -l shows tty is missing try to get a shell by using this:
 https://netsec.ws/?p=337 
 
+*Monitor Process unprivileged*
+
+    https://github.com/DominicBreuker/pspy 
+
+
+
 **Windows Post Exploitation**
 
 *Powershell Reverse Shell*
@@ -1110,7 +1116,7 @@ https://gist.github.com/egre55/c058744a4240af6515eb32b2d33fbed3
 *Crack Password Hash*
 
     john --wordlist=/root/rockyou.txt <dumpfile>
-    john --show windows
+    john --show <dumpfile>
 
 *Online Hashcracker*
 
@@ -1337,6 +1343,27 @@ https://www.openwall.com/lists/john-users/2015/11/17/1
 
     gpg --allow-secret-key-import --import tryhackme.asc
     gpg --delete-secret-keys "tryhackme"
+
+*Writing space*
+
+Space can be written as
+
+    ${IFS}
+
+so ls -la would be
+
+    ls${IFS}-la
+
+Execute Bash/Sh script
+
+alternative to
+
+     ./<script> 
+
+you can also write 
+
+  bash <script>
+
 
 **Additional**
 
