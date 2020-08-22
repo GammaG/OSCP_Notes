@@ -1111,6 +1111,9 @@ https://netsec.ws/?p=337
 
 !exchange sh for bash
 
+    python -c 'import pty; pty.spawn("/bin/bash")'
+    echo os.system('/bin/bash')
+
 *Upgrade TTY further*
 
 Enables autocomplete in reverse shell and so on
