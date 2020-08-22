@@ -1109,11 +1109,13 @@ move over something like shell.c and gcc it + chmod +s it
 If sudo -l shows tty is missing try to get a shell by using this:
 https://netsec.ws/?p=337 
 
+!exchange sh for bash
+
 *Upgrade TTY further*
 
 Enables autocomplete in reverse shell and so on
 
-Close the connection Strg + c
+Close the connection Strg + z
 
     stty raw -echo
     fg + enter (twice)
