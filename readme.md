@@ -19,7 +19,7 @@ find out the ip of the machine in the network
 
 **Find ports**
 
-*SSH fast UDP*
+*Fast UDP*
 
     nmap -Pn --top-ports 1000 -sU --stats-every 3m --max-retries 1 -T3 -oN /root/result.txt <ip>
 
@@ -34,7 +34,7 @@ find out the ip of the machine in the network
     fi
     sudo nmap -Pn --top-ports 1000 -sU --stats-every 3m --max-retries 1 -T3 -oN $2 $1
 
-*SSH intensive* 
+*TLS intensive* 
 
     nmap -Pn -sS --stats-every 3m --max-retries 1 --max-scan-delay 20 --defeat-rst-ratelimit -T4 -p1-65535 -oN /root/desktop/result.txt <ip>
 
