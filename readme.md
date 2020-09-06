@@ -886,6 +886,12 @@ PowerShell
 Other
 
 - windows-exploit-suggester.py https://github.com/AonCyberLabs/Windows-Exploit-Suggester
+
+    python2 -m pip install xlrd --upgrade
+    python2 windows-exploit-suggester.py --update --gives the database for vulnerabilities
+    C:\>systeminfo > win7sp1-systeminfo.txt
+    python2 windows-exploit-suggester.py --database 2014-06-06-mssb.xlsx --systeminfo win7sp1-systeminfo.txt 
+
 - exploit suggester (metasploit) https://blog.rapid7.com/2015/08/11/metasploit-local-exploit-suggester-do-less-get-more/ 
 
 **Linux**
