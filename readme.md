@@ -856,11 +856,39 @@ https://www.vulnhub.com/entry/basic-pentesting-1,216/
 
 *Guides*
 
-Windows
+**Windows**
 
 https://www.fuzzysecurity.com/tutorials/16.html 
 
-Linux
+
+*Windows-PrivEsc-Checklist*
+
+https://book.hacktricks.xyz/windows/checklist-windows-privilege-escalation
+
+*Analysis Tools*
+
+Executable
+
+- winPEAS.exe https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS 
+
+Deployment with Visual Studio Required
+
+- Seatbelt.exe https://github.com/GhostPack/Seatbelt 
+- Watson.exe https://github.com/rasta-mouse/Watson
+- SharpUp.exe https://github.com/GhostPack/SharpUp
+
+PowerShell
+
+- Sherlock.ps1 https://github.com/rasta-mouse/Sherlock 
+- PowerUp.ps1 https://github.com/PowerShellMafia/PowerSploit/tree/master/Privesc 
+- jaws-enum.ps1 https://github.com/411Hall/JAWS
+
+Other
+
+- windows-exploit-suggester.py https://github.com/AonCyberLabs/Windows-Exploit-Suggester
+- exploit suggester (metasploit) https://blog.rapid7.com/2015/08/11/metasploit-local-exploit-suggester-do-less-get-more/ 
+
+**Linux**
 
 https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/ 
 
