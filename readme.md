@@ -1434,10 +1434,12 @@ https://www.giuspen.com/cherrytree/#downl
 
 https://www.reddit.com/r/oscp/ 
 
-**Mount shared Folder**
+**Mount shared Folder virutalbox**
+
+    mkdir share
 
     #!/bin/bash
-    sudo mount -t vboxsf share/~share
+    sudo mount -t vboxsf <folder-host> ~/share/
 
 
 
