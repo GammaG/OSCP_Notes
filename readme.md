@@ -1441,6 +1441,29 @@ https://www.reddit.com/r/oscp/
     #!/bin/bash
     sudo mount -t vboxsf <folder-host> ~/share/
 
+**DNS Crypt Proxy Upgrade**
+
+Releases
+
+    https://github.com/DNSCrypt/dnscrypt-proxy/releases/
+
+Raspberry requires the dnscrypt-proxy-linux_arm version.
+
+Get the specific version with wget directly and unpack via tar.
+
+    tar -xvzf dnscrypt-proxy-linux_arm-X.X.X.tar.gz
+
+Find the process dns-cryptproxy runs with and kill it
+
+    sudo lsof /opt/dnscrypt-proxy/dnscrypt-proxy
+    sudo kill <pid>
+
+Make a backup and replace the unpacked dnscrpyt-proxy with the one that is in the upacked package.
+
+    sudo cp SERVICE_PATH/dns-crypt-proxy SERVICE_PATH/dns-crypt-proxy.bak 
+    sudo cp DOWNLOAD_PATH/dns-crypt-proxy SERVICE_PATH/dns-crypt-proxy
+
+After that restart the raspberry
 
 
 
