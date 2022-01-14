@@ -129,6 +129,13 @@ Plugins are having the potential of beeing outdated.
     cb - include all coonfig backups
     dbe - database exports
 
+Registering an API key gives 25 free requests per day using the API Token afterwards add the token to the scan request
+
+    --api-token TOKEN
+    
+    wpscan --url <url> --enumerate ap,at,cb,dbe --disable-tls-checks --api-token TOKEN
+
+
 Check WP Logins by dir
 
     wpscan --url <url> --passwords /location/of/wordlist --usernames <name>
