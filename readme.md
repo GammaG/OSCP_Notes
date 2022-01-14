@@ -676,6 +676,17 @@ Sample to attack Kioptrix
     /usr/share/john/ssh2john.py <priv_key_with_pw> > privKey_1
     john --wordlist=/usr/share/wordlists/rockyou.txt privKey_1
 
+*Decrypt RSA*
+
+Script
+https://github.com/GammaG/DecryptRSA/blob/master/decryptRSA.py
+
+In Python Terminal transfer the result to hex cut of hex declarations and decode the hex
+
+    pt= <pt>
+    str(hex(pt)[2:-1]).decode('hex')
+
+
 **XSS and MySQL FILE**
 
 https://www.vulnhub.com/entry/pentester-lab-xss-and-mysql-file,66/ 
