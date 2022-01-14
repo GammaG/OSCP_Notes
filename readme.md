@@ -119,22 +119,36 @@ Then add the DNS to the hosts file under:
 
 in order to pass neginx/apache and show the page.
 
+*Searchsploit*
+
+    Searchsploit "matching name from scans"
+    Searchsploit -x "pathToExploit"
+
+*Log results*
+
+it works well to add information to a txt file in the system and watch the result in a second tab.
+
+    first tab
+    [request] > path/scan.txt
+    second tab 
+    tail -f path/scan.txt
+
 *Wordpress Scan*
 
 Plugins are having the potential of beeing outdated.
 
-    wpscan --url <url> --enumerate ap,at,cb,dbe --disable-tls-checks
+    wpscan --url <url> --enumerate u,ap,at,cb,dbe --disable-tls-checks
     ap - include all Plugins
     at - include all themes
     cb - include all coonfig backups
     dbe - database exports
+    u - enumerate users
 
 Registering an API key gives 25 free requests per day using the API Token afterwards add the token to the scan request
 
     --api-token TOKEN
-    
-    wpscan --url <url> --enumerate ap,at,cb,dbe --disable-tls-checks --api-token TOKEN
 
+    wpscan --url <url> --enumerate ap,at,cb,dbe --disable-tls-checks --api-token TOKEN 
 
 Check WP Logins by dir
 
@@ -657,6 +671,11 @@ Sample to attack Kioptrix
     -v - verbose mode
     -P - Passwordlist
 
+*Crack ssh with john*
+
+    /usr/share/john/ssh2john.py <priv_key_with_pw> > privKey_1
+    john --wordlist=/usr/share/wordlists/rockyou.txt privKey_1
+
 **XSS and MySQL FILE**
 
 https://www.vulnhub.com/entry/pentester-lab-xss-and-mysql-file,66/ 
@@ -913,6 +932,10 @@ Other
 
 **Linux**
 
+*show current path*
+
+    pwd
+
 https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/ 
 
 
@@ -1001,6 +1024,16 @@ This will start a session handler and wait for incomming reverse shell requests.
     net user <accountname> <password>
 
 **Linux Enumeration**
+
+*Transfer file via ssh*
+
+Push
+
+    scp <path_to_file> user@server:/home/user
+
+Get
+
+    scp user@server:/home/user/file.tgz /home/user
 
 *ARP*
 
