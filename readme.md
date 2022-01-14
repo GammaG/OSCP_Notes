@@ -109,11 +109,21 @@ take a big one and remove "manual"
 
 **Enumeration**
 
+*Page does not load*
+
+That is the case if only 443 is available and you know the DNS by scanning the SSL cert. 
+Try if only the nginx/apache landing page is loaded. 
+Then add the DNS to the hosts file under:
+
+    /etc/hosts
+
+in order to pass neginx/apache and show the page.
+
 *Wordpress Scan*
 
 Plugins are having the potential of beeing outdated.
 
-    wpscan --url <url> --enumerate ap,at,cd,dbe
+    wpscan --url <url> --enumerate ap,at,cb,dbe --disable-tls-checks
     ap - include all Plugins
     at - include all themes
     cb - include all coonfig backups
