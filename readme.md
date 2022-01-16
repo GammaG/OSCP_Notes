@@ -70,6 +70,9 @@ find out the ip of the machine in the network
     -oN /root/result.txt
     <ip>
 
+*Alternative*
+
+    nmap -sC -sV -oA nmap/active <ip>
 
 *Shell Script*
 
@@ -80,6 +83,16 @@ find out the ip of the machine in the network
     fi
     sudo nmap -Pn -nvv -p $2 --version-intensity 9 -A -oN $3 $1
 
+*Use nmap scripts*
+
+Find all nmap scripts and grep for specific case
+
+    locate -r '\.nse$' | xargs grep categories | grep 'default\|version\|safe' | grep smb
+
+use script
+
+    nmap --script safe -p <target port> <ip>
+
 **Enumeration**
 
 All kind of enumeration topics
@@ -88,7 +101,20 @@ All kind of enumeration topics
 
     curl -v -X Options <ip>
 
+**Search for Domains**
 
+*Lookup a hostname*
+
+    nslookup
+    <ip>
+
+if that fails scan the entire network range
+
+*Scan the entire network range*
+
+    dnsrecon -d <domain> r -<range>
+    e.g.
+    dnsrecon -d 10.10.10.10 -r 10.0.0.0/8
 
 **Search for Directories**
 
@@ -1225,6 +1251,38 @@ Back in the shell
 *Monitor Process unprivileged*
 
     https://github.com/DominicBreuker/pspy 
+
+**Active Directory Exploitation**
+
+*SMB*
+
+
+*SMB Analysis*
+
+This lists file shares and shows the permissions
+
+    smbmap -H <ip>
+
+Connect to smb share to make a null authentication and may see the shares available and will give a prompt when login was successful
+
+    smbclient //<ip>/<share>
+
+List all files in dir with permissions
+
+    smbmap -R <directory> -H <ip>
+
+Get files from SMB by filename
+
+    smbmap -R <directory> -H <ip> -A <fileToDownload> -q
+    Or
+    smbclient '\\server\share'
+    recurse ON
+    prompt OFF
+    mget * (or the specific file) - will store it to ~
+
+Decrypt Grouppolicy password
+
+    gpp-decrypt <pw>
 
 **Windows Post Exploitation**
 
