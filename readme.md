@@ -1270,11 +1270,21 @@ Connect to smb share to make a null authentication and may see the shares availa
 List all files in dir with permissions
 
     smbmap -R <directory> -H <ip>
+    OR
+    smbclient '\\server\share'
+    find . -type f
+    OR
+    recurse ON
+    ls
+
+with a known user
+
+    smbmap -d <domain> -u <user> -p <password> -H <ip>
 
 Get files from SMB by filename
 
     smbmap -R <directory> -H <ip> -A <fileToDownload> -q
-    Or
+    OR
     smbclient '\\server\share'
     recurse ON
     prompt OFF
@@ -1283,6 +1293,25 @@ Get files from SMB by filename
 Decrypt Grouppolicy password
 
     gpp-decrypt <pw>
+
+*Exploitation*
+
+Get impacket https://github.com/GammaG/impacket and intall via
+
+    python3 -m pip install .
+
+List all users
+
+    GetADUsers.py -all <DomainName>/<User> -dc-ip <TargetIP> 
+
+Try if you are admin
+
+    psexec.py <DomainName>/<User>@<ip>
+
+Switch to Windows
+
+    
+
 
 **Windows Post Exploitation**
 
