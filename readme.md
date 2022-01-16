@@ -1308,9 +1308,6 @@ Try if you are admin
 
     psexec.py <DomainName>/<User>@<ip>
 
-Switch to Windows
-
-    
 
 
 **Windows Post Exploitation**
