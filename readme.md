@@ -133,7 +133,12 @@ take a big one and remove "manual"
 
     gobuster dir -u <ip> -w /usr/share/wordlists/x
 
-**Enumeration**
+*Drupal*
+
+Install droopescan via pip https://github.com/SamJoan/droopescan 
+
+    droopescan scan drupal -u <targetIP> -> Scan takes a long time
+
 
 *Page does not load*
 
