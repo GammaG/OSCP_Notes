@@ -131,7 +131,11 @@ take a big one and remove "manual"
 
 *gobuster*
 
-    gobuster dir -u <ip> -w /usr/share/wordlists/x
+    gobuster dir -u <ip> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x txt -t 30
+
+    -ip in format http://domain.com:5000 
+    -t threads
+
 
 *Drupal*
 
@@ -1694,7 +1698,11 @@ https://www.reddit.com/r/oscp/
     sudo mount -t vboxsf <folder-host> ~/share/
  
 
+**SSH**
 
+Use custom key file for ssh
+
+    ssh root@ip -i privKey.pem
 
 
 
