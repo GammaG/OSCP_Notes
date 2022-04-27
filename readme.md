@@ -1013,6 +1013,26 @@ Other
 
 - exploit suggester (metasploit) https://blog.rapid7.com/2015/08/11/metasploit-local-exploit-suggester-do-less-get-more/ 
 
+https://null-byte.wonderhowto.com/how-to/get-root-with-metasploits-local-exploit-suggester-0199463/
+
+Upgrade to Meterpreter 
+
+CTRL + Z to background the session and y for yes
+you can verify with "sessions"
+upgrade by typing
+
+    sessions -u 1
+
+and go back into the session by 
+
+    sessions -i <id>
+
+Sessions should run in background
+
+    use multi/recon/local_exploit_suggester
+
+specify the meterpreter session via set session <id> and run
+
 *PowerUp Shell*
 
     locate PowerUp.ps1
