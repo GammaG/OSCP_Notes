@@ -1221,6 +1221,29 @@ https://github.com/mubix/post-exploitation/wiki/Linux-Post-Exploitation-Command-
 
 Search for flags as well
 
+**Android**
+
+Decompile with APK Tools makes dex to smali and make the manifest readable .bin -> .xml
+
+    apktool d <apk>
+
+Decomplie dex to java
+
+    d2j-dex2jar -d /path/to/classes.dex
+
+Open jar with jd-gui
+
+*Analyse apk further*
+
+MobSF Framework allows analyse clone it and install with setup.sh
+
+    git clone https://github.com/MobSF/Mobile-Security-Framework-MobSF --depth=1
+
+easier is the docker version
+
+    docker pull opensecurity/mobile-security-framework-mobsf
+    docker run -it -p 8000:8000 opensecurity/mobile-security-framework-mobsf:latest
+
 **Windows Exploitation**
 
 *ASP Reverse Shell*
