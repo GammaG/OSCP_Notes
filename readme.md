@@ -1225,6 +1225,10 @@ https://github.com/danielmiessler/SecLists/blob/master/Discovery/DNS/subdomains-
 
     --hw 290 to take out 404 pages
 
+Alternative with gobuster
+
+    gobuster vhost -u <url> -w /opt/SecLists/Discovery/DNS/subdomains-top1million-20000.txt
+
 **Exploitation**
 
 *Linux Post Exploitation*
