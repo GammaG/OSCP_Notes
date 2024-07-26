@@ -744,7 +744,8 @@ Debian 64 and Live image
 *XSS*
 
     <script>alert('xss')</script>
-
+    " onmouseover="alert(document.cookie)
+    
 create index.php and put it in the home directory of the user you will run it with
 
     <?php
