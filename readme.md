@@ -126,6 +126,10 @@ if that fails scan the entire network range
 
     dirbuster
 
+*dirbuster with wordlist*
+    
+    dirb <ip> /usr/share/wordlists/x.txt
+
 Good to download a wordlist from github
 take a big one and remove "manual"
 
