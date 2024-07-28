@@ -1909,6 +1909,10 @@ Use custom key file for ssh
 
     ssh root@ip -i privKey.pem
 
+**JWT Decode**
+
+    JWTs can be decoded using https://jwt.io/. This tool allows to craft and decode JWTs. Also to modify an original JWT to generate a new one using the same secret (so long as the secret is known).
+
 **Brute Force CSRF Token**
 
 Python Script to brute force a password based on the rockyou wordlist entering every time a new csrf token that is extracted from the page.
