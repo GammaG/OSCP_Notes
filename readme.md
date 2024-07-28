@@ -1912,6 +1912,9 @@ Use custom key file for ssh
 **JWT Decode**
 
     JWTs can be decoded using https://jwt.io/. This tool allows to craft and decode JWTs. Also to modify an original JWT to generate a new one using the same secret (so long as the secret is known).
+    Crack the secret using jwtcrack.
+    
+        ./jwtcrack <JWT>
 
 **Brute Force CSRF Token**
 
